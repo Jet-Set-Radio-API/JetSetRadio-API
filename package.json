@@ -1,0 +1,27 @@
+{
+  "name": "jetsetradio-api",
+  "version": "1.0.0",
+  "description": "A Data Provider relating to the JSR/JSRF universe",
+  "type": "module",
+  "main": "src/app.js",
+  "scripts": {
+    "build": "npm install",
+    "prod": "export $(cat ./prod.env | egrep -v '#|^$' | xargs) && node src/app.js",
+    "qa": "export $(cat ./qa.env | egrep -v '#|^$' | xargs) && nodemon --inspect src/app.js"
+  },
+  "keywords": [],
+  "author": "RazzNBlue",
+  "license": "Apache 2.0",
+  "dependencies": {
+    "axios": "^1.3.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "mongodb": "^5.1.0",
+    "nodemon": "^2.0.22",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^4.6.2",
+    "winston": "^3.8.2"
+  }
+}
