@@ -2,6 +2,8 @@ import { MongoClient } from 'mongodb';
 import dotenv from 'dotenv';
 dotenv.config();
 
+import LOGGER from '../utils/logger.js';
+
 
 const buildMongoUri = () => {
   const user = process.env.MONGO_USER;
