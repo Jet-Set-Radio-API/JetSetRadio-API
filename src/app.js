@@ -1,5 +1,7 @@
 import express from 'express';
 import axios from 'axios';
+import dotenv from 'dotenv';
+dotenv.config();
 
 import LOGGER from './utils/logger.js';
 import MiddlewareManager from './managers/MiddlewareManager.js';
@@ -9,6 +11,7 @@ const middlewareManager = new MiddlewareManager();
 
 const app = express();
 const PORT = process.env.PORT;
+const baseUrl = process.env.BASE_URL;
 
 middlewareManager.setMiddleware(app);
 
