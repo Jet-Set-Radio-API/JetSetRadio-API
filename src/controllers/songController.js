@@ -7,20 +7,24 @@ const {Collections: {Song}} = Constants;
 
 export const getSongs = async (req, res) => {
   try {
-    const jsrSongs = await performJSRAction(Actions.fetchAll, Song);
-    const jsrfSongs = await performJSRFAction(Actions.fetchAll, Song);
-    if (jsrSongs && jsrfSongs) {
-      return res.send([...jsrSongs, ...jsrfSongs]);
+    const songs = [];
+    const jsrSongs = await fetchJSRSongs(req);
+    const jsrfSongs = await fetchJSRFSongs(req);
+    if (jsrSongs && jsrSongs.length > 0) {
+      songs.push(jsrSongs);
     }
-    res.status(404).send();
+    if (jsrfSongs && jsrfSongs.length > 0) {
+      songs.push(jsrfSongs);
+    }
+    res.send(songs.flat(1));
   } catch(err) {
-    res.status(500).send(`Could not fetch ALL SONGS \n${err}`);
+    res.status(500).send(`Could not fetch ALL SONGS due to error: \n${err}`);
   }
 }
 
 export const getJSRSongs = async (req, res) => {
   try {
-    const jsrSongs = await performJSRAction(Actions.fetchAll, Song);
+    const jsrSongs = await fetchJSRSongs(req)
     if (jsrSongs) {
       return res.send(jsrSongs);
     }
@@ -44,25 +48,13 @@ export const getJSRSongById = async (req, res) => {
 
 export const getJSRFSongs = async (req, res) => {
   try {
-    let jsrfSongs = [];
-    const chapters = req?.query?.chapters.split(',');
-    for (const chapter of chapters) {
-      if (chapter) {
-        const matchingSongs = await performJSRFAction(Actions.fetchAllByKeyAndValue, Song, null, 'chapters', chapter);
-        for (const matchingSong of matchingSongs) {
-          // Prevent adding duplicates to response
-          if (!jsrfSongs.some(song => song.name === matchingSong.name)) {
-            jsrfSongs.push(...matchingSongs);
-          }
-        }
-      }
-    }
+    const jsrfSongs = await fetchJSRFSongs(req);
     if (jsrfSongs) {
       return res.send(jsrfSongs);
     }
     res.status(404).send();
   } catch(err) {
-    res.status(500).send(`Could not fetch JSRF SONGS \n${err}`);
+    res.status(500).send(`Could not fetch JSRF Songs \n${err}`);
   }
 }
 
@@ -76,4 +68,19 @@ export const getJSRFSongById = async (req, res) => {
   } catch(err) {
     res.status(500).send(`Could not fetch JSRF SONG with ID: ${req.params.id} \n${err}`);
   }
+}
+
+
+const fetchJSRSongs = async (req) => {
+  if (req?.query) {
+    return await performJSRAction(Actions.fetchWithQuery, Song, null, req?.query);
+  }
+  return await performJSRAction(Actions.fetchAll, null, Song);
+}
+
+const fetchJSRFSongs = async (req) => {
+  if (req?.query) {
+    return await performJSRFAction(Actions.fetchWithQuery, Song, null, req?.query);
+  }
+  return await performJSRFAction(Actions.fetchAll, null, Song);
 }

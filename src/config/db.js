@@ -30,11 +30,10 @@ const buildMongoUri = () => {
 
 const client = new MongoClient(buildMongoUri());
 
-//Core DB
-export const performCoreAction = async (action, collection, id, key, value) => {
+export const performCoreAction = async (action, collection, id, qps) => {
   try {
     await client.connect();
-    return await action(client, CORE_DB, collection, id, key, value);
+    return await action(client, CORE_DB, collection, id, getQueryObject(qps));
   } catch(err) {
     console.error(err);
     return err;
@@ -43,11 +42,10 @@ export const performCoreAction = async (action, collection, id, key, value) => {
   }
 }
 
-//JSR
-export const performJSRAction = async (action, collection, id, key, value) => {
+export const performJSRAction = async (action, collection, id, qps) => {
   try {
     await client.connect();
-    return await action(client, JSR_DB, collection, id, key, value);
+    return await action(client, JSR_DB, collection, id, getQueryObject(qps));
   } catch(err) {
     console.error(err);
     return err;
@@ -56,12 +54,11 @@ export const performJSRAction = async (action, collection, id, key, value) => {
   }
 }
 
-//JSRF
-export const performJSRFAction = async (action, collection, id, key, value) => {
+
+export const performJSRFAction = async (action, collection, id, qps) => {
   try {
     await client.connect();
-    console.log('KEYYY: ' + key);
-    return await action(client, JSRF_DB, collection, id, key, value);
+    return await action(client, JSRF_DB, collection, id, getQueryObject(qps));
   } catch(err) {
     console.error(err);
     return err;
@@ -70,4 +67,20 @@ export const performJSRFAction = async (action, collection, id, key, value) => {
   }
 }
 
+// Prepare the queryParameters as one single object for mongoDB query
+const getQueryObject = (qps) => {
+  if (qps) {
+    const queryMap = {};
+    for (let [key, value] of Object.entries(qps)) {
+      if (value.includes(',')) {
+        value = value.split(',')
+        queryMap[key] = {$all: value}; // Uses AND currently...
+      } else {
+        queryMap[key] = value;
+      }
+    }
+    return queryMap;
+  }
+  return {};
+}
 
