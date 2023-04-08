@@ -9,7 +9,7 @@ export const getAllGames = async (req, res) => {
   try {
     res.send(await performCoreAction(Actions.fetchAll, Game));
   } catch(err) {
-    res.send(err);
+    res.status(500).send(err);
   }
 }
 

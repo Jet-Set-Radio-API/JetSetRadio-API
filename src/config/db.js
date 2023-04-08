@@ -72,7 +72,7 @@ const getQueryObject = (qps) => {
   if (qps) {
     const queryMap = {};
     for (let [key, value] of Object.entries(qps)) {
-      if (value.includes(',')) {
+      if (typeof value === String && value.includes(',')) {
         value = value.split(',')
         queryMap[key] = {$all: value}; // Uses AND currently...
       } else {

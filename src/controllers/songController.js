@@ -75,12 +75,12 @@ const fetchJSRSongs = async (req) => {
   if (req?.query) {
     return await performJSRAction(Actions.fetchWithQuery, Song, null, req?.query);
   }
-  return await performJSRAction(Actions.fetchAll, null, Song);
+  return await performJSRAction(Actions.fetchAll, Song, null);
 }
 
 const fetchJSRFSongs = async (req) => {
   if (req?.query) {
     return await performJSRFAction(Actions.fetchWithQuery, Song, null, req?.query);
   }
-  return await performJSRFAction(Actions.fetchAll, null, Song);
+  return await performJSRFAction(Actions.fetchAll, Song, null);
 }
