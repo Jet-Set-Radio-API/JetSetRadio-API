@@ -12,6 +12,7 @@ const Constants = {
     CronJob: 'CronJob',
     Game: 'Game',
     GraffitiTag: 'GraffitiTag',
+    Song: 'Song'
   }
 }
 

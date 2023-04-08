@@ -3,6 +3,9 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import LOGGER from '../utils/logger.js';
+import Constants from '../constants/constants.js';
+
+const { Databases: { CORE_DB, JSR_DB, JSRF_DB }} = Constants
 
 
 const buildMongoUri = () => {
@@ -27,10 +30,38 @@ const buildMongoUri = () => {
 
 const client = new MongoClient(buildMongoUri());
 
-export const performAction = async (action, db, collection, id, key, value) => {
+//Core DB
+export const performCoreAction = async (action, collection, id, key, value) => {
   try {
     await client.connect();
-    return await action(client, db, collection, id, key, value);
+    return await action(client, CORE_DB, collection, id, key, value);
+  } catch(err) {
+    console.error(err);
+    return err;
+  } finally {
+    await client.close();
+  }
+}
+
+//JSR
+export const performJSRAction = async (action, collection, id, key, value) => {
+  try {
+    await client.connect();
+    return await action(client, JSR_DB, collection, id, key, value);
+  } catch(err) {
+    console.error(err);
+    return err;
+  } finally {
+    await client.close();
+  }
+}
+
+//JSRF
+export const performJSRFAction = async (action, collection, id, key, value) => {
+  try {
+    await client.connect();
+    console.log('KEYYY: ' + key);
+    return await action(client, JSRF_DB, collection, id, key, value);
   } catch(err) {
     console.error(err);
     return err;
