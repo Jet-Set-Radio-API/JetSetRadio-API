@@ -17,12 +17,13 @@ This is an open-source software free for anyone to use. I do NOT claim to own.
 ## Top Features
  - Automatic API data ingestion from data providers
  - CronJob scheduling
+ - Automatically generate API Documentation
 
 
 ## Integrations
  - MongoDB
  - Google Cloud
- - SwaggerUI
+ - SwaggerUI and [swagger-autogen](https://www.npmjs.com/package/swagger-autogen)
  - JetSetPedia
 
 
@@ -45,6 +46,7 @@ Feel free to post anything under Issues even if it is a question or comment. If 
 ## Acknowledgements
  - SEGA - Creators and Owners of Jet Set Radio
  - Hideki Naganuma - Composer, DJ, and Remixer of Jet Set Radio Music
+ - All other artists that contributed to the franchise
  - The Creators and Contributors of [JetSetPedia](https://jetsetradio.fandom.com/wiki/Main_Page)
  - Greg Kennedy for gathering all of the [JSR Graffiti Files](https://greg-kennedy.com/jsr/) into one organized place.
  - The JetSetRadio Community

@@ -1,34 +1,39 @@
-import swaggerJSDoc from 'swagger-jsdoc';
-import swaggerUi from 'swagger-ui-express';
-import LOGGER from './logger.js';
+import swaggerAutogen from "swagger-autogen";
+import dotenv from 'dotenv';
+dotenv.config();
 
-
-const options = {
-  definition: {
-    openapi: '3.0.0',
-    info: {
-      title: 'JetSetRadio-API',
-      version: process.env.npm_package_version,
-    },
+const doc = {
+  info: {
+    title: 'JetSetRadio-API',
+    version: process.env.npm_package_version,
+    description: 'Providing data for all things JSR and JSRF!',
   },
-  apis: ['./src/routes/gameRouter.js', './src/routes/graffitiTagRouter.js'],
+  host: process.env.BASE_URL.split('http://')[1],
+  schemes: ['http', 'https'],
+  basePath: '/v1/api/',
+  tags: [
+    {
+      "name": "Games",
+      "description": "Title from the JetSetRadio Franchise"
+    },
+    {
+      "name": "GraffitiTags",
+      "description": "All Graffiti-Points from the games"
+    },
+    {
+      "name": "Songs",
+      "description": "Soundtrack Data from JSR and JSRF"
+    },
+    {
+      "name": "Artists",
+      "description": "Artist Data from JSR and JSRF"
+    }
+],
 };
 
-const swaggerSpec = swaggerJSDoc(options);
+const outputFile = './src/utils/swagger-docs.json';
+const endpointFiles = ['./src/routes/router.js'];
 
-const setUpSwagger = (app) => {
-
-  const docsPath = '/api-docs';
-  // Swagger Page
-  app.use(docsPath, swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
-  // Docs in JSON
-  app.get(`${docsPath}.json`, (req, res) => {
-    res.setHeader('Content-Type', 'application/json');
-    res.send(swaggerSpec);
-  });
-
-  LOGGER.info(`Docs available at ${process.env.BASE_URL}${docsPath}`);
-}
-
-export default setUpSwagger;
+swaggerAutogen()(outputFile, endpointFiles, doc).then(async () => {
+  await import('../app.js');
+})
