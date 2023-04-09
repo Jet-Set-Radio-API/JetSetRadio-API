@@ -3,6 +3,9 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import LOGGER from '../utils/logger.js';
+import Constants from '../constants/constants.js';
+
+const { Databases: { CORE_DB, JSR_DB, JSRF_DB }} = Constants
 
 
 const buildMongoUri = () => {
@@ -27,10 +30,10 @@ const buildMongoUri = () => {
 
 const client = new MongoClient(buildMongoUri());
 
-export const performAction = async (action, db, collection, id, key, value) => {
+export const performCoreAction = async (action, collection, id, qps) => {
   try {
     await client.connect();
-    return await action(client, db, collection, id, key, value);
+    return await action(client, CORE_DB, collection, id, getQueryObject(qps));
   } catch(err) {
     console.error(err);
     return err;
@@ -39,4 +42,45 @@ export const performAction = async (action, db, collection, id, key, value) => {
   }
 }
 
+export const performJSRAction = async (action, collection, id, qps) => {
+  try {
+    await client.connect();
+    return await action(client, JSR_DB, collection, id, getQueryObject(qps));
+  } catch(err) {
+    console.error(err);
+    return err;
+  } finally {
+    await client.close();
+  }
+}
+
+
+export const performJSRFAction = async (action, collection, id, qps) => {
+  try {
+    await client.connect();
+    return await action(client, JSRF_DB, collection, id, getQueryObject(qps));
+  } catch(err) {
+    console.error(err);
+    return err;
+  } finally {
+    await client.close();
+  }
+}
+
+// Prepare the queryParameters as one single object for mongoDB query
+const getQueryObject = (qps) => {
+  if (qps) {
+    const queryMap = {};
+    for (let [key, value] of Object.entries(qps)) {
+      if (typeof value === String && value.includes(',')) {
+        value = value.split(',')
+        queryMap[key] = {$all: value}; // Uses AND currently...
+      } else {
+        queryMap[key] = value;
+      }
+    }
+    return queryMap;
+  }
+  return {};
+}
 

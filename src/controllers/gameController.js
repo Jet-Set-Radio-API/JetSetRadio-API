@@ -1,22 +1,29 @@
-import { performAction } from "../config/db.js";
+import { performCoreAction } from "../config/db.js";
 import { Actions } from "../config/dbActions.js";
 import Constants from "../constants/constants.js";
 
 
-const { Databases: { CORE_DB }, Collections: { Game } } = Constants;
+const { Collections: { Game } } = Constants;
 
 export const getAllGames = async (req, res) => {
   try {
-    res.send(await performAction(Actions.fetchAll, CORE_DB, Game));
+    res.send(await fetchGames(req));
   } catch(err) {
-    res.send(err);
+    res.status(500).send(err);
   }
 }
 
 export const getGameById = async (req, res) => {
   try {
-    res.send(await performAction(Actions.fetchById, CORE_DB, Game, req?.params?.id));
+    res.send(await performCoreAction(Actions.fetchById, Game, req?.params?.id));
   } catch(err) {
     res.send(err);
   }
+}
+
+const fetchGames = async (req) => {
+  if (req?.query) {
+    return await performCoreAction(Actions.fetchWithQuery, Game, null, req?.query);
+  }
+  return await performCoreAction(Actions.fetchAll, Game, null);
 }
