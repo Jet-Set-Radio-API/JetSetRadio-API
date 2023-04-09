@@ -6,8 +6,8 @@
   "main": "src/app.js",
   "scripts": {
     "build": "npm install",
-    "prod": "export $(cat ./prod.env | egrep -v '#|^$' | xargs) && node src/app.js",
-    "qa": "export $(cat ./qa.env | egrep -v '#|^$' | xargs) && nodemon --inspect src/app.js"
+    "prod": "export $(cat ./prod.env | egrep -v '#|^$' | xargs) && node src/utils/swagger.js",
+    "qa": "export $(cat ./qa.env | egrep -v '#|^$' | xargs) && nodemon --inspect --ignore src/utils/ src/utils/swagger.js"
   },
   "keywords": [],
   "author": "RazzNBlue",
@@ -20,7 +20,7 @@
     "express": "^4.18.2",
     "mongodb": "^5.1.0",
     "nodemon": "^2.0.22",
-    "swagger-jsdoc": "^6.2.8",
+    "swagger-autogen": "^2.23.1",
     "swagger-ui-express": "^4.6.2",
     "winston": "^3.8.2"
   }
