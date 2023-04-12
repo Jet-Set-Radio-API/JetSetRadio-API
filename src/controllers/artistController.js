@@ -44,14 +44,14 @@ export const getSongsByArtist = async (req, res) => {
 }
 
 
-const fetchArtists = async (req) => {
+export const fetchArtists = async (req) => {
   if (req?.query) {
     return await performCoreAction(Actions.fetchWithQuery, Artist, null, req?.query);
   }
   return await performCoreAction(Actions.fetchAll, Artist, null);
 }
 
-const fetchSongsByArtistId = async (artistId) => {
+export const fetchSongsByArtistId = async (artistId) => {
   const songs = [];
   const jsrSongs = await performJSRAction(Actions.fetchWithQuery, Song, null, { artistId: new ObjectId(artistId) });
   const jsrfSongs = await performJSRFAction(Actions.fetchWithQuery, Song, null, { artistId: new ObjectId(artistId) });

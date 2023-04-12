@@ -5,6 +5,7 @@
   "type": "module",
   "main": "src/app.js",
   "scripts": {
+    "test": "export $(cat ./test.env | egrep -v '#|^$' | xargs) && node --no-warnings --experimental-vm-modules ./node_modules/jest/bin/jest.js",
     "build": "npm install",
     "prod": "export $(cat ./prod.env | egrep -v '#|^$' | xargs) && node src/utils/swagger.js",
     "qa": "export $(cat ./qa.env | egrep -v '#|^$' | xargs) && nodemon --inspect --ignore src/utils/ src/utils/swagger.js"
@@ -23,5 +24,10 @@
     "swagger-autogen": "^2.23.1",
     "swagger-ui-express": "^4.6.2",
     "winston": "^3.8.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.0",
+    "jest": "^29.5.0",
+    "mongodb-memory-server": "^8.12.2"
   }
 }
