@@ -50,14 +50,14 @@ export const getJSRFGraffitiTagById = async (req, res) => {
   }
 }
 
-const fetchJSRTags = async (req) => {
+export const fetchJSRTags = async (req) => {
   if (req?.query) {
     return await performJSRAction(Actions.fetchWithQuery, GraffitiTag, null, req?.query);
   }
   return await performJSRAction(Actions.fetchAll, GraffitiTag, null);
 }
 
-const fetchJSRFTags = async (req) => {
+export const fetchJSRFTags = async (req) => {
   if (req?.query) {
     return await performJSRFAction(Actions.fetchWithQuery, GraffitiTag, null, req?.query);
   }
