@@ -11,8 +11,8 @@ export const getSongs = async (req, res) => {
   try {
     const query = req?.query;
     const songs = [];
-    const jsrSongs = await SongFetch.fetchJSRSongs(query);
-    const jsrfSongs = await SongFetch.fetchJSRFSongs(query);
+    const jsrSongs = await fetchJSRSongs(query);
+    const jsrfSongs = await fetchJSRFSongs(query);
     if (jsrSongs && jsrSongs.length > 0) {
       songs.push(jsrSongs);
     }
@@ -27,7 +27,7 @@ export const getSongs = async (req, res) => {
 
 export const getJSRSongs = async (req, res) => {
   try {
-    const jsrSongs = await SongFetch.fetchJSRSongs(req?.query)
+    const jsrSongs = await fetchJSRSongs(req?.query)
     if (jsrSongs) {
       return res.send(jsrSongs);
     }
@@ -39,7 +39,7 @@ export const getJSRSongs = async (req, res) => {
 
 export const getJSRSongById = async (req, res) => {
   try {
-    const jsrSong = await SongFetch.fetchJSRSongById(req?.params?.id);
+    const jsrSong = await fetchJSRSongById(req?.params?.id);
     if (jsrSong) {
       return res.send(jsrSong);
     }
@@ -51,7 +51,7 @@ export const getJSRSongById = async (req, res) => {
 
 export const getJSRFSongs = async (req, res) => {
   try {
-    const jsrfSongs = await SongFetch.fetchJSRFSongs(req?.query);
+    const jsrfSongs = await fetchJSRFSongs(req?.query);
     if (jsrfSongs) {
       return res.send(jsrfSongs);
     }
@@ -63,7 +63,7 @@ export const getJSRFSongs = async (req, res) => {
 
 export const getJSRFSongById = async (req, res) => {
   try {
-    const jsrfSong = await SongFetch.fetchJSRFSongById(req?.params?.id);
+    const jsrfSong = await fetchJSRFSongById(req?.params?.id);
     if (jsrfSong) {
       return res.send(jsrfSong);
     }
