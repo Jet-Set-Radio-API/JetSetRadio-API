@@ -5,8 +5,8 @@ dotenv.config();
 import LOGGER from '../utils/logger.js';
 import Constants from '../constants/constants.js';
 
-const { Databases: { CORE_DB, JSR_DB, JSRF_DB }} = Constants
 
+const { Databases: { CORE_DB, JSR_DB, JSRF_DB }} = Constants
 
 const buildMongoUri = () => {
   const user = process.env.MONGO_USER;
@@ -54,11 +54,22 @@ export const performJSRAction = async (action, collection, id, qps) => {
   }
 }
 
-
 export const performJSRFAction = async (action, collection, id, qps) => {
   try {
     await client.connect();
     return await action(client, JSRF_DB, collection, id, getQueryObject(qps));
+  } catch(err) {
+    console.error(err);
+    return err;
+  } finally {
+    await client.close();
+  }
+}
+
+export const listCollections = async (dbName) => {
+  try {
+    await client.connect();
+    return await client.db(dbName).listCollections().toArray();
   } catch(err) {
     console.error(err);
     return err;
