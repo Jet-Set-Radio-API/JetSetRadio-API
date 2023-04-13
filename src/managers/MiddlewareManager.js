@@ -83,5 +83,4 @@ const filterPipeRoutes = async (req, endpoints) => {
   return [...new Set(endpoints)];
 }
 
-
 export default MiddlewareManager;
