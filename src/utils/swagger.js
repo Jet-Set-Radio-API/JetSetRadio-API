@@ -17,6 +17,10 @@ const doc = {
       "description": "Title from the JetSetRadio Franchise"
     },
     {
+      "name": "Characters",
+      "description": "Characters from JSR/JSRF"
+    },
+    {
       "name": "GraffitiTags",
       "description": "All Graffiti-Points from the games"
     },
