@@ -13,6 +13,11 @@ This is an open-source software free for anyone to use. I do NOT claim to own.
  *NOTE: I do NOT own JetSetRadio, JetSetRadioFuture, or any entity falling under the JetSetRadio franchise. I do not own the name Jet-Set-Radio-API. I do not own any of the content provided by this API.
 
 
+## How To Run
+See these [instructions](/src/docs/DEV_SETUP.md) on how to set up a development environment.
+The only dependency this project has is a mongo database.
+
+
 ## Endpoints and DOCS
  - View all endpoints on the [Endpoints Page]() (Coming Soon)
  - For developer documentation, see the [Swagger Docs](https://jetsetradio-api.onrender.com/docs)
@@ -49,4 +54,3 @@ Feel free to post anything under Issues even if it is a question or comment. If 
  - The Creators and Contributors of [JetSetPedia](https://jetsetradio.fandom.com/wiki/Main_Page)
  - Greg Kennedy for gathering all of the [JSR Graffiti Files](https://greg-kennedy.com/jsr/) into one organized place.
  - The JetSetRadio Community
-
