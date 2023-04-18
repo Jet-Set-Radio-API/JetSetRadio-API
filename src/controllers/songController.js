@@ -1,11 +1,8 @@
-import Constants from "../constants/constants.js";
 import { performJSRAction, performJSRFAction } from "../config/db.js";
 import { Actions } from "../config/dbActions.js";
-import dotenv from 'dotenv';
-dotenv.config();
 
-const {Collections: {Song}} = Constants;
 
+const Song = 'Song';
 
 export const getSongs = async (req, res) => {
   try {

@@ -10,7 +10,7 @@ const data = require('../utils/swagger-docs.json');
 import dotenv from 'dotenv';
 dotenv.config();
 
-import Constants from '../constants/constants.js';
+import Constants from '../constants/dbConstants.js';
 import HealthCheckManager from './HealthCheckManager.js';
 import router from '../routes/router.js';
 import { renderHome } from '../controllers/indexController.js';
@@ -19,7 +19,7 @@ import { listCollections } from '../config/db.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const healthCheckManager = new HealthCheckManager();
-const { Databases:{ CORE_DB, JSR_DB, JSRF_DB } } = Constants
+const { CORE_DB, JSR_DB, JSRF_DB } = Constants;
 
 class MiddlewareManager {
 
@@ -43,7 +43,7 @@ class MiddlewareManager {
 
 /**
  * Return a list of Available Endpoints
- * You can pass a pipe=true to filter the results to just the routes needed to populate a development database
+ * Pass pipe=true to filter the results to just the routes needed to populate a development database
  * 
  * @param {*} req : the express request object
  * @param {*} endpoints : the unfiltered endpoints object list

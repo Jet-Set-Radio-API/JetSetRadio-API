@@ -1,10 +1,9 @@
 import { performJSRAction, performJSRFAction } from "../config/db.js";
 import { Actions } from "../config/dbActions.js";
-import Constants from "../constants/constants.js";
 import LOGGER from "../utils/logger.js";
 
 
-const { Collections: { Character }} = Constants;
+const Character = 'Character';
 
 export const getAllCharacters = async (req, res) => {
   try {

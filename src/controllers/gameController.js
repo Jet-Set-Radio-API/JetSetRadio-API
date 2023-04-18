@@ -1,9 +1,8 @@
 import { performCoreAction } from "../config/db.js";
 import { Actions } from "../config/dbActions.js";
-import Constants from "../constants/constants.js";
 
 
-const { Collections: { Game } } = Constants;
+const Game = 'Game';
 
 export const getAllGames = async (req, res) => {
   try {
