@@ -17,11 +17,15 @@ This page will guide you on setting up a development environment for this projec
     ```sh
     npm install
     ```
-3. [Create](https://account.mongodb.com/account/login) a MongoDB Database in Atlas 
-   - If you need help with this step, feel free to reach out.
+3. [Create](https://account.mongodb.com/account/login) a local MongoDB Database or in Atlas 
+
 4. Obtain the database Connection URI
 
-5. Fill out a .env file using .env.example as a template; make sure to rename the file to ```qa.env```
+5. Fill out a .env file; it needs to be renamed to ```qa.env```
+    - Reference this example uri with yours to extract what is needed for the .env file
+    ``` 
+    mongodb+srv://<USERNAME>:<PASSWORD>@<CLUSTER>.<DOMAIN>?retryWrites=true&w=majority
+    ```
 6. Run the project 
     ```sh
     npm run qa
@@ -30,3 +34,4 @@ This page will guide you on setting up a development environment for this projec
     ```sh
     http://localhost:3005/pipe
     ```
+    Warning: hitting this route will delete EVERYTHING from your local database and populate it exactly with what exists in production.
