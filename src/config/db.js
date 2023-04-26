@@ -1,4 +1,5 @@
 import { MongoClient } from 'mongodb';
+import { ObjectId } from 'mongodb';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -86,6 +87,10 @@ const getQueryObject = (qps) => {
       if (typeof value === String && value.includes(',')) {
         value = value.split(',')
         queryMap[key] = {$all: value}; // Uses AND currently...
+      } else if (value === 'true' || value === 'false') {
+        queryMap[key] = value === 'true' ? true : false;
+      } else if (key.includes('.id') && ObjectId.isValid(value)) {
+        queryMap[key] = new ObjectId(value);
       } else {
         queryMap[key] = value;
       }

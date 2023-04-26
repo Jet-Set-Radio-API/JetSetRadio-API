@@ -10,11 +10,19 @@
   "tags": [
     {
       "name": "Games",
-      "description": "Title from the JetSetRadio Franchise"
+      "description": "Titles from the JetSetRadio Franchise"
     },
     {
       "name": "Characters",
       "description": "Characters from JSR/JSRF"
+    },
+    {
+      "name": "Locations",
+      "description": "Locations from JSR/JSRF"
+    },
+    {
+      "name": "Levels",
+      "description": "Levels from JSR"
     },
     {
       "name": "GraffitiTags",
@@ -30,8 +38,8 @@
     }
   ],
   "schemes": [
-    "http",
-    "https"
+    "https",
+    "http"
   ],
   "paths": {
     "/games/": {
@@ -408,6 +416,125 @@
       "get": {
         "tags": [
           "Characters"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/locations/": {
+      "get": {
+        "tags": [
+          "Locations"
+        ],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/locations/jsr": {
+      "get": {
+        "tags": [
+          "Locations"
+        ],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/locations/jsr/{id}": {
+      "get": {
+        "tags": [
+          "Locations"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/locations/jsrf": {
+      "get": {
+        "tags": [
+          "Locations"
+        ],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/locations/jsrf/{id}": {
+      "get": {
+        "tags": [
+          "Locations"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/levels/": {
+      "get": {
+        "tags": [
+          "Levels"
+        ],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/levels/{id}": {
+      "get": {
+        "tags": [
+          "Levels"
         ],
         "description": "",
         "parameters": [
