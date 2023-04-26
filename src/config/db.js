@@ -4,10 +4,10 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import LOGGER from '../utils/logger.js';
-import Constants from '../constants/constants.js';
+import Constants from '../constants/dbConstants.js';
 
 
-const { Databases: { CORE_DB, JSR_DB, JSRF_DB }} = Constants
+const { CORE_DB, JSR_DB, JSRF_DB } = Constants;
 
 const buildMongoUri = () => {
   const user = process.env.MONGO_USER;

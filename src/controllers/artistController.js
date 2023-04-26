@@ -1,10 +1,10 @@
-import Constants from "../constants/constants.js";
 import { performCoreAction, performJSRAction, performJSRFAction } from "../config/db.js";
 import { Actions } from "../config/dbActions.js";
 import { ObjectId } from "mongodb";
 
 
-const {Collections: {Artist, Song}} = Constants;
+const Artist = 'Artist';
+const Song = 'Song';
 
 export const getArtists = async (req, res) => {
   try {

@@ -1,10 +1,10 @@
 import { performJSRAction, performJSRFAction } from "../config/db.js";
 import { Actions } from "../config/dbActions.js";
-import Constants from "../constants/constants.js";
 import LOGGER from "../utils/logger.js";
 
 
-const { Collections: { Location, Level  }} = Constants;
+const Location = 'Location';
+const Level = 'Level';
 
 export const getLocations = async (req, res) => {
   try {
