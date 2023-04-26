@@ -13,7 +13,8 @@ const Constants = {
     Game: 'Game',
     GraffitiTag: 'GraffitiTag',
     Song: 'Song',
-    Artist: 'Artist'
+    Artist: 'Artist',
+    Character: 'Character'
   }
 }
 

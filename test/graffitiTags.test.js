@@ -26,15 +26,15 @@ describe('GraffitiTag Routes', () => {
     expect(Array.isArray(tags)).toBe(true);
     expect(isValidJson(tags)).toBe(true);
 
-    expect(jsrTags[0]).toHaveProperty('number')
-    expect(jsrTags[0]).toHaveProperty('tagName')
-    expect(jsrTags[0]).toHaveProperty('tagSubName')
-    expect(jsrTags[0]).toHaveProperty('imageUrl')
-    expect(jsrfTags[10]).toHaveProperty('tagName');
-    expect(jsrfTags[10]).toHaveProperty('gameId');
-    expect(jsrfTags[10]).toHaveProperty('imageUrl');
-    expect(jsrfTags[10]).toHaveProperty('wikiImageUrl');
-    expect(jsrfTags[10]).toHaveProperty('level');
+    expect(jsrTags[0]).toHaveProperty('number');
+    expect(jsrTags[0]).toHaveProperty('tagName');
+    expect(jsrTags[0]).toHaveProperty('tagSubName');
+    expect(jsrTags[0]).toHaveProperty('imageUrl');
+    expect(jsrfTags[9]).toHaveProperty('tagName');
+    expect(jsrfTags[9]).toHaveProperty('gameId');
+    expect(jsrfTags[9]).toHaveProperty('imageUrl');
+    expect(jsrfTags[9]).toHaveProperty('wikiImageUrl');
+    expect(jsrfTags[9]).toHaveProperty('level');
   })
 
   /* Unit/Mock Tests */
