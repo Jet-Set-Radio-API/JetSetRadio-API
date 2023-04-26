@@ -9,16 +9,24 @@ const doc = {
     description: 'Providing data for all things JSR and JSRF!',
   },
   host: process.env.BASE_URL.split('http://')[1],
-  schemes: ['http', 'https'],
+  schemes: ['https', 'http'],
   basePath: '/v1/api/',
   tags: [
     {
       "name": "Games",
-      "description": "Title from the JetSetRadio Franchise"
+      "description": "Titles from the JetSetRadio Franchise"
     },
     {
       "name": "Characters",
       "description": "Characters from JSR/JSRF"
+    },
+    {
+      "name": "Locations",
+      "description": "Locations from JSR/JSRF"
+    },
+    {
+      "name": "Levels",
+      "description": "Levels from JSR"
     },
     {
       "name": "GraffitiTags",

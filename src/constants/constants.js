@@ -14,7 +14,9 @@ const Constants = {
     GraffitiTag: 'GraffitiTag',
     Song: 'Song',
     Artist: 'Artist',
-    Character: 'Character'
+    Character: 'Character',
+    Location: 'Location',
+    Level: 'Level'
   }
 }
 
