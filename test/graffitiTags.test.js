@@ -34,7 +34,6 @@ describe('GraffitiTag Routes', () => {
     expect(jsrfTags[9]).toHaveProperty('gameId');
     expect(jsrfTags[9]).toHaveProperty('imageUrl');
     expect(jsrfTags[9]).toHaveProperty('wikiImageUrl');
-    expect(jsrfTags[9]).toHaveProperty('level');
   })
 
   /* Unit/Mock Tests */
@@ -57,8 +56,12 @@ describe('GraffitiTag Routes', () => {
     const result = await axios.get(`${baseUrl}/graffiti-tags/jsrf/${testId}`);
     expect(isValidJson(result.data)).toBe(true);
     expect(result.data.number).toBe("No. 025");
-    expect(result.data.level).toBe("Tokyo Underground Sewage Facility/the bottom point of Sewage Facility");
+    expect(result.data.tagName).toBe("Poison Jam");
+    expect(result.data.size).toBe("SS");
     expect(result.data.imageUrl).toBe("https://storage.googleapis.com/jetsetradio-api/jsrf/graffiti-tags/025.png");
+    expect(result.data.locations[0].name).toBe('Tokyo Underground Sewage Facility');
+    expect(result.data.locations[0].id).toBe('6445cb9dd85986264951f134');
+    expect(result.data.locations).toHaveLength(2);
     expect(axios.get).toHaveBeenCalledTimes(1);
   })
 
@@ -77,17 +80,26 @@ describe('GraffitiTag Routes', () => {
 }}
 
   const createJsrfTag = (testId) => {return {
-    "_id" : testId,
+    "_id" : "6430ea8f11948a6df41bcf22",
     "number" : "No. 025",
     "tagName" : "Poison Jam",
-    "level" : "Tokyo Underground Sewage Facility/the bottom point of Sewage Facility",
-    "location" : "Test Runs (Unlock Poison Jam as a playable character)",
     "size" : "SS",
-    "gameId" : "642f773924b4bca91d5a6c57",
     "wikiImageUrl" : "https://static.wikia.nocookie.net/jetsetradio/images/e/e8/No._025.png/revision/latest/scale-to-width-down/80?cb=20170220220832",
     "imageUrl" : "https://storage.googleapis.com/jetsetradio-api/jsrf/graffiti-tags/025.png",
-    "createdAt" : "2023-04-07T01:52:38.343Z",
-    "updatedAt" : "2023-04-07T01:52:38.343Z"
+    "gameId" : "64285b7918c8a0231136dc5d",
+    "createdAt" : "2023-04-08T04:16:16.114Z",
+    "updatedAt" : "2023-04-24T04:23:33.147Z",
+    "graffitiSoulLocation" : "Test Runs (Unlock Poison Jam as a playable character)",
+    "locations" : [ 
+        {
+            "name" : "Tokyo Underground Sewage Facility",
+            "id" : "6445cb9dd85986264951f134"
+        }, 
+        {
+            "name" : "Bottom Point of Sewage Facility",
+            "id" : "6445cb9ed85986264951f13b"
+        }
+    ]
 }}
 
   const isValidJson = (text) => {
