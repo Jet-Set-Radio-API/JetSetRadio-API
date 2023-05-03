@@ -1,22 +1,21 @@
 import { performJSRAction, performJSRFAction } from "../config/db.js";
 import { Actions } from "../config/dbActions.js";
+import { sortObjects } from "../utils/utility.js";
 
 
 const Song = 'Song';
 
 export const getSongs = async (req, res) => {
   try {
-    const query = req?.query;
-    const songs = [];
-    const jsrSongs = await fetchJSRSongs(query);
-    const jsrfSongs = await fetchJSRFSongs(query);
-    if (jsrSongs && jsrSongs.length > 0) {
-      songs.push(jsrSongs);
+    const sortByValue = req?.query?.sortBy ? req?.query?.sortBy : undefined;
+    const sortOrder = req?.query?.orderBy ? req?.query?.orderBy : 'asc';
+    const jsrSongs = await fetchJSRSongs(req);
+    const jsrfSongs = await fetchJSRFSongs(req);
+    if (sortByValue) {
+      const songs = [...jsrSongs, ...jsrfSongs];
+      return res.send(songs.sort(sortObjects(sortByValue, sortOrder)));
     }
-    if (jsrfSongs && jsrfSongs.length > 0) {
-      songs.push(jsrfSongs);
-    }
-    res.send(songs.flat(1));
+    res.send([...jsrSongs, ...jsrfSongs]);
   } catch(err) {
     res.status(500).send(`Could not fetch ALL SONGS due to error: \n${err}`);
   }
@@ -24,7 +23,7 @@ export const getSongs = async (req, res) => {
 
 export const getJSRSongs = async (req, res) => {
   try {
-    const jsrSongs = await fetchJSRSongs(req?.query)
+    const jsrSongs = await fetchJSRSongs(req);
     if (jsrSongs) {
       return res.send(jsrSongs);
     }
@@ -36,7 +35,7 @@ export const getJSRSongs = async (req, res) => {
 
 export const getJSRSongById = async (req, res) => {
   try {
-    const jsrSong = await fetchJSRSongById(req?.params?.id);
+    const jsrSong = await performJSRAction(Actions.fetchById, Song, id);
     if (jsrSong) {
       return res.send(jsrSong);
     }
@@ -48,7 +47,7 @@ export const getJSRSongById = async (req, res) => {
 
 export const getJSRFSongs = async (req, res) => {
   try {
-    const jsrfSongs = await fetchJSRFSongs(req?.query);
+    const jsrfSongs = await fetchJSRFSongs(req);
     if (jsrfSongs) {
       return res.send(jsrfSongs);
     }
@@ -60,7 +59,7 @@ export const getJSRFSongs = async (req, res) => {
 
 export const getJSRFSongById = async (req, res) => {
   try {
-    const jsrfSong = await fetchJSRFSongById(req?.params?.id);
+    const jsrfSong = await performJSRFAction(Actions.fetchById, Song, id);
     if (jsrfSong) {
       return res.send(jsrfSong);
     }
@@ -70,24 +69,10 @@ export const getJSRFSongById = async (req, res) => {
   }
 }
 
-export const fetchJSRSongs = async (query) => {
-  if (query) {
-    return await performJSRAction(Actions.fetchWithQuery, Song, null, query);
-  }
-  return await performJSRAction(Actions.fetchAll, Song, null);
-}
-
-export const fetchJSRSongById = async (id) => {
-  return await performJSRAction(Actions.fetchById, Song, id);
+export const fetchJSRSongs = async (req) => {
+  return await performJSRAction(Actions.fetchWithQuery, Song, null, req?.query);
 }
   
-export const fetchJSRFSongs = async (query) => {
-  if (query) {
-    return await performJSRFAction(Actions.fetchWithQuery, Song, null, query);
-  }
-  return await performJSRFAction(Actions.fetchAll, Song, null);
-}
-
-export const fetchJSRFSongById = async (id) => {
-  return await performJSRFAction(Actions.fetchById, Song, id);
+export const fetchJSRFSongs = async (req) => {
+  return await performJSRFAction(Actions.fetchWithQuery, Song, null, req?.query);
 }

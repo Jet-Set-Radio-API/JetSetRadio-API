@@ -5,6 +5,7 @@ dotenv.config();
 
 import { connect, disconnect } from './helper/mongodbMemoryTest.js';
 import { fetchJSRLocations, fetchJSRFLocations, fetchJSRLevels } from '../src/controllers/locationController.js';
+import { sortObjects } from '../src/utils/utility.js';
 
 const baseUrl = `${process.env.BASE_URL}/v1/api`;
 const createMock = mockObj => axios.get = jest.fn().mockResolvedValue({ __esModule: true, data: mockObj })
@@ -43,6 +44,39 @@ describe('Location Routes', () => {
     expect(levels[0]).toHaveProperty('location')
     expect(levels[0]).toHaveProperty('bossLevel')
     expect(levels[0]).toHaveProperty('chapter')
+  })
+
+  test('GET /locations?sortBy=name&orderBy=desc', async () => {
+    const req = {query: { sortBy: 'name', orderBy: 'desc' }};
+    const sortByValue = req?.query?.sortBy ? req?.query?.sortBy : undefined;
+    const sortOrder = req?.query?.orderBy ? req?.query?.orderBy : 'asc';
+    const jsrLocations = await fetchJSRLocations();
+    const jsrfLocations = await fetchJSRFLocations();
+
+    let locations = [];
+    if (sortByValue) {
+      const allLocations = [...jsrLocations, ...jsrfLocations];
+      locations = allLocations.sort(sortObjects(sortByValue, sortOrder));
+    } else {
+      tags = [...jsrLocations, ...jsrfLocations];
+    }
+    expect(isValidJson(locations)).toBe(true);
+  })
+
+  test('GET /locations/jsr?limit=2', async () => {
+    const req = {query: { limit: '2' }};
+    const locations = await fetchJSRLocations(req);
+    expect(Array.isArray(locations)).toBe(true);
+    expect(isValidJson(locations)).toBe(true);
+    expect(locations).toHaveLength(2);
+  })
+
+  test('GET /locations/jsrf?limit=15', async () => {
+    const req = {query: { limit: '15' }};
+    const locations = await fetchJSRFLocations(req);
+    expect(Array.isArray(locations)).toBe(true);
+    expect(isValidJson(locations)).toBe(true);
+    expect(locations).toHaveLength(15);
   })
 
   /* Unit/Mock Tests */

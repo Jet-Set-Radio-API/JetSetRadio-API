@@ -1,14 +1,21 @@
 import { performJSRAction, performJSRFAction } from "../config/db.js";
 import { Actions } from "../config/dbActions.js";
 import LOGGER from "../utils/logger.js";
+import { sortObjects } from "../utils/utility.js";
 
 
 const GraffitiTag = 'GraffitiTag';
 
 export const getAllGraffitiTags = async (req, res) => {
   try {
+    const sortByValue = req?.query?.sortBy ? req?.query?.sortBy : undefined;
+    const sortOrder = req?.query?.orderBy ? req?.query?.orderBy : 'asc';
     const jsrTags = await fetchJSRTags(req);
     const jsrfTags = await fetchJSRFTags(req);
+    if (sortByValue) {
+      const tags = [...jsrTags, ...jsrfTags];
+      return res.send(tags.sort(sortObjects(sortByValue, sortOrder)));
+    }
     res.send([...jsrTags, ...jsrfTags]);
   } catch(err) {
     LOGGER.error(`Could not fetch ALL GraffitiTags \n${err}`);
