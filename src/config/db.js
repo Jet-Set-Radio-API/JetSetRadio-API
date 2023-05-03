@@ -31,10 +31,12 @@ const buildMongoUri = () => {
 
 const client = new MongoClient(buildMongoUri());
 
+/* Database Connections */
 export const performCoreAction = async (action, collection, id, qps) => {
   try {
     await client.connect();
-    return await action(client, CORE_DB, collection, id, getQueryObject(qps));
+    const queryActions = [getSortQuery(qps), getLimitSize(qps)];
+    return await action(client, CORE_DB, collection, id, getQueryObject(qps), queryActions);
   } catch(err) {
     console.error(err);
     return err;
@@ -46,7 +48,8 @@ export const performCoreAction = async (action, collection, id, qps) => {
 export const performJSRAction = async (action, collection, id, qps) => {
   try {
     await client.connect();
-    return await action(client, JSR_DB, collection, id, getQueryObject(qps));
+    const queryActions = [getSortQuery(qps), getLimitSize(qps)];
+    return await action(client, JSR_DB, collection, id, getQueryObject(qps), queryActions);
   } catch(err) {
     console.error(err);
     return err;
@@ -58,7 +61,8 @@ export const performJSRAction = async (action, collection, id, qps) => {
 export const performJSRFAction = async (action, collection, id, qps) => {
   try {
     await client.connect();
-    return await action(client, JSRF_DB, collection, id, getQueryObject(qps));
+    const queryActions = [getSortQuery(qps), getLimitSize(qps)];
+    return await action(client, JSRF_DB, collection, id, getQueryObject(qps), queryActions);
   } catch(err) {
     console.error(err);
     return err;
@@ -79,17 +83,30 @@ export const listCollections = async (dbName) => {
   }
 }
 
+const excludedKeys = ['sortBy', 'orderBy', 'filter', 'page', 'limit'];
+const objectIdKeys = ['gameId', 'locationId', 'levelId', 'graffitiTagId', 'characterId', 'artistId', 'songId',
+  'game.id', 'location.id', 'adjacentLocations.id', 'level.id', 'graffitiTag.id', 'character.id', 'artist.id', 'song.id'];
+
 // Prepare the queryParameters as one single object for mongoDB query
 const getQueryObject = (qps) => {
   if (qps) {
     const queryMap = {};
+
+    /* Remove special keys that will be used for query suffix */
+    excludedKeys.forEach(key => delete qps[key]);
+
+    /* Transform the user query object into a format MongoDB can understand */
     for (let [key, value] of Object.entries(qps)) {
       if (typeof value === String && value.includes(',')) {
         value = value.split(',')
         queryMap[key] = {$all: value}; // Uses AND currently...
       } else if (value === 'true' || value === 'false') {
         queryMap[key] = value === 'true' ? true : false;
-      } else if (key.includes('.id') && ObjectId.isValid(value)) {
+      } else if (typeof value === String && value.toLowerCase() === 'female') {
+        queryMap[key] = 'Female';
+      } else if (typeof value === String && value.toLowerCase() === 'male') {
+        queryMap[key] = 'Male';
+      } else if (objectIdKeys.includes(key) && ObjectId.isValid(value)) {
         queryMap[key] = new ObjectId(value);
       } else {
         queryMap[key] = value;
@@ -98,5 +115,17 @@ const getQueryObject = (qps) => {
     return queryMap;
   }
   return {};
+}
+
+const getSortQuery = (query) => {
+  const field = query?.sortBy;
+  const order = query?.orderBy || 'asc';
+  const orderMap = { asc: 1, desc: -1 };
+  return field ? {[field]: orderMap[order]} : {};
+}
+
+const getLimitSize = (query) => {
+  const limit = query?.limit || '0';
+  return !isNaN(Number(limit)) && limit !== '0' ? Number(limit) : 0;
 }
 

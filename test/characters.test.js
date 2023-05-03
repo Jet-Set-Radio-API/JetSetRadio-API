@@ -5,6 +5,7 @@ dotenv.config();
 
 import { connect, disconnect } from './helper/mongodbMemoryTest.js';
 import { fetchJSRCharacters, fetchJSRFCharacters } from '../src/controllers/characterController.js';
+import { sortObjects } from '../src/utils/utility.js';
 
 const baseUrl = `${process.env.BASE_URL}/v1/api`;
 const createMock = mockObj => axios.get = jest.fn().mockResolvedValue({ __esModule: true, data: mockObj })
@@ -30,6 +31,39 @@ describe('Character Routes', () => {
     expect(jsrCharacters[0]).toHaveProperty('descriptions')
     expect(jsrCharacters[0]).toHaveProperty('heroImage')
     expect(jsrCharacters[0]).toHaveProperty('wikiPage')
+  })
+
+  test('GET /characters?sortBy=name&orderBy=desc', async () => {
+    const req = {query: { sortBy: 'name', orderBy: 'desc' }};
+    const sortByValue = req?.query?.sortBy ? req?.query?.sortBy : undefined;
+    const sortOrder = req?.query?.orderBy ? req?.query?.orderBy : 'asc';
+    const jsrCharacters = await fetchJSRCharacters();
+    const jsrfCharacters = await fetchJSRFCharacters();
+
+    let characters = [];
+    if (sortByValue) {
+      const allCharacters = [...jsrCharacters, ...jsrfCharacters];
+      characters = allCharacters.sort(sortObjects(sortByValue, sortOrder));
+    } else {
+      characters = [...jsrCharacters, ...jsrfCharacters];
+    }
+    expect(isValidJson(characters)).toBe(true);
+  })
+
+  test('GET /characters/jsr?limit=5', async () => {
+    const req = {query: { limit: '5' }};
+    const jsrCharacters = await fetchJSRCharacters(req);
+    expect(Array.isArray(jsrCharacters)).toBe(true);
+    expect(isValidJson(jsrCharacters)).toBe(true);
+    expect(jsrCharacters).toHaveLength(5);
+  })
+
+  test('GET /characters/jsrf?limit=15', async () => {
+    const req = {query: { limit: '15' }};
+    const jsrCharacters = await fetchJSRCharacters(req);
+    expect(Array.isArray(jsrCharacters)).toBe(true);
+    expect(isValidJson(jsrCharacters)).toBe(true);
+    expect(jsrCharacters).toHaveLength(15);
   })
 
   /* Unit/Mock Tests */

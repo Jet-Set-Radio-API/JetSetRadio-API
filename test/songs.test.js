@@ -5,10 +5,11 @@ dotenv.config();
 
 import { connect, disconnect } from './helper/mongodbMemoryTest.js';
 import { fetchJSRSongs, fetchJSRFSongs } from '../src/controllers/songController.js';
+import { sortObjects } from '../src/utils/utility.js';
+
 
 const baseUrl = `${process.env.BASE_URL}/v1/api`;
 const createMock = mockObj => axios.get = jest.fn().mockResolvedValue({ __esModule: true, data: mockObj })
-
 
 describe('Songs Routes', () => {
 
@@ -30,6 +31,39 @@ describe('Songs Routes', () => {
     expect(songs[0]).toHaveProperty('gameId');
     expect(songs[0]).toHaveProperty('name');
     expect(songs[0]).toHaveProperty('shortName');
+  })
+
+  test('GET /songs?sortBy=name&orderBy=desc', async () => {
+    const req = {query: { sortBy: 'name', orderBy: 'desc' }};
+    const sortByValue = req?.query?.sortBy ? req?.query?.sortBy : undefined;
+    const sortOrder = req?.query?.orderBy ? req?.query?.orderBy : 'asc';
+    const jsrSongs = await fetchJSRSongs();
+    const jsrfSongs = await fetchJSRFSongs();
+
+    let songs = [];
+    if (sortByValue) {
+      const allSongs = [...jsrSongs, ...jsrfSongs];
+      songs = allSongs.sort(sortObjects(sortByValue, sortOrder));
+    } else {
+      songs = [...jsrSongs, ...jsrfSongs];
+    }
+    expect(isValidJson(songs)).toBe(true);
+  })
+
+  test('GET /songs/jsr?limit=5', async () => {
+    const req = {query: { limit: '5' }};
+    const songs = await fetchJSRSongs(req);
+    expect(Array.isArray(songs)).toBe(true);
+    expect(isValidJson(songs)).toBe(true);
+    expect(songs).toHaveLength(5);
+  })
+
+  test('GET /songs/jsrf?limit=15', async () => {
+    const req = {query: { limit: '15' }};
+    const songs = await fetchJSRFSongs(req);
+    expect(Array.isArray(songs)).toBe(true);
+    expect(isValidJson(songs)).toBe(true);
+    expect(songs).toHaveLength(15);
   })
 
   /* Unit/Mock Tests */

@@ -22,10 +22,7 @@ export const getGameById = async (req, res) => {
 
 
 export const fetchGames = async (query) => {
-  if (query) {
-    return await performCoreAction(Actions.fetchWithQuery, Game, null, query);
-  }
-  return await performCoreAction(Actions.fetchAll, Game, null);
+  return await performCoreAction(Actions.fetchWithQuery, Game, null, query);
 }
 
 export const fetchGameById = async (id) => {

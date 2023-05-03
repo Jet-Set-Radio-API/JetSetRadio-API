@@ -1,6 +1,7 @@
 import { performJSRAction, performJSRFAction } from "../config/db.js";
 import { Actions } from "../config/dbActions.js";
 import LOGGER from "../utils/logger.js";
+import { sortObjects } from "../utils/utility.js";
 
 
 const Location = 'Location';
@@ -8,8 +9,14 @@ const Level = 'Level';
 
 export const getLocations = async (req, res) => {
   try {
+    const sortByValue = req?.query?.sortBy ? req?.query?.sortBy : undefined;
+    const sortOrder = req?.query?.orderBy ? req?.query?.orderBy : 'asc';
     const jsrLocations = await fetchJSRLocations(req);
     const jsrfLocations = await fetchJSRFLocations(req);
+    if (sortByValue) {
+      const locations = [...jsrLocations, ...jsrfLocations];
+      return res.send(locations.sort(sortObjects(sortByValue, sortOrder)));
+    }
     res.send([...jsrLocations, ...jsrfLocations]);
   } catch(err) {
     LOGGER.error(`Could not fetch ALL Locations \n${err}`);

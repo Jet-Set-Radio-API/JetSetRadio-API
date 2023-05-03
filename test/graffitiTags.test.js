@@ -5,6 +5,7 @@ dotenv.config();
 
 import { connect, disconnect } from './helper/mongodbMemoryTest.js';
 import { fetchJSRTags, fetchJSRFTags } from '../src/controllers/graffitiTagController.js';
+import { sortObjects } from '../src/utils/utility.js';
 
 const baseUrl = `${process.env.BASE_URL}/v1/api`;
 const createMock = mockObj => axios.get = jest.fn().mockResolvedValue({ __esModule: true, data: mockObj })
@@ -34,6 +35,39 @@ describe('GraffitiTag Routes', () => {
     expect(jsrfTags[9]).toHaveProperty('gameId');
     expect(jsrfTags[9]).toHaveProperty('imageUrl');
     expect(jsrfTags[9]).toHaveProperty('wikiImageUrl');
+  })
+
+  test('GET /graffiti-tags?sortBy=name&orderBy=desc', async () => {
+    const req = {query: { sortBy: 'name', orderBy: 'desc' }};
+    const sortByValue = req?.query?.sortBy ? req?.query?.sortBy : undefined;
+    const sortOrder = req?.query?.orderBy ? req?.query?.orderBy : 'asc';
+    const jsrTags = await fetchJSRTags();
+    const jsrfTags = await fetchJSRFTags();
+
+    let tags = [];
+    if (sortByValue) {
+      const allTags = [...jsrTags, ...jsrfTags];
+      tags = allTags.sort(sortObjects(sortByValue, sortOrder));
+    } else {
+      tags = [...jsrTags, ...jsrfTags];
+    }
+    expect(isValidJson(tags)).toBe(true);
+  })
+
+  test('GET /graffiti-tags/jsr?limit=5', async () => {
+    const req = {query: { limit: '5' }};
+    const tags = await fetchJSRTags(req);
+    expect(Array.isArray(tags)).toBe(true);
+    expect(isValidJson(tags)).toBe(true);
+    expect(tags).toHaveLength(5);
+  })
+
+  test('GET /graffiti-tags/jsrf?limit=15', async () => {
+    const req = {query: { limit: '15' }};
+    const tags = await fetchJSRFTags(req);
+    expect(Array.isArray(tags)).toBe(true);
+    expect(isValidJson(tags)).toBe(true);
+    expect(tags).toHaveLength(15);
   })
 
   /* Unit/Mock Tests */

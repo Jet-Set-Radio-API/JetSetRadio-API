@@ -1,14 +1,21 @@
 import { performJSRAction, performJSRFAction } from "../config/db.js";
 import { Actions } from "../config/dbActions.js";
 import LOGGER from "../utils/logger.js";
+import { sortObjects } from "../utils/utility.js";
 
 
 const Character = 'Character';
 
 export const getAllCharacters = async (req, res) => {
   try {
+    const sortByValue = req?.query?.sortBy ? req?.query?.sortBy : undefined;
+    const sortOrder = req?.query?.orderBy ? req?.query?.orderBy : 'asc';
     const jsrCharacters = await fetchJSRCharacters(req);
     const jsrfCharacters = await fetchJSRFCharacters(req);
+    if (sortByValue) {
+      const characters = [...jsrCharacters, ...jsrfCharacters];
+      return res.send(characters.sort(sortObjects(sortByValue, sortOrder)));
+    }
     res.send([...jsrCharacters, ...jsrfCharacters]);
   } catch(err) {
     LOGGER.error(`Could not fetch ALL Characters \n${err}`);
@@ -50,15 +57,9 @@ export const getJSRFCharacterById = async (req, res) => {
 }
 
 export const fetchJSRCharacters = async (req) => {
-  if (req?.query) {
-    return await performJSRAction(Actions.fetchWithQuery, Character, null, req?.query);
-  }
-  return await performJSRAction(Actions.fetchAll, Character, null);
+  return await performJSRAction(Actions.fetchWithQuery, Character, null, req?.query);
 }
 
 export const fetchJSRFCharacters = async (req) => {
-  if (req?.query) {
-    return await performJSRFAction(Actions.fetchWithQuery, Character, null, req?.query);
-  }
-  return await performJSRFAction(Actions.fetchAll, Character, null);
+  return await performJSRFAction(Actions.fetchWithQuery, Character, null, req?.query);
 }
