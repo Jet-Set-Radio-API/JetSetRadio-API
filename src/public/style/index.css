@@ -1,0 +1,78 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: jetSet;
+  src: url('font/Jet-Set.ttf');
+}
+
+@font-face {
+  font-family: jetSetItalic;
+  src: url('/font/Jet-Set-Italic.ttf');
+}
+
+#img-container {
+  width: 100%;
+  min-height: 50vh;
+  max-height: 600px;
+  position: relative;
+  overflow: hidden;
+}
+
+#img-container img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+#main-text {
+  font-family: jetSetItalic;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 5.5vw;
+}
+
+#swagger {
+  position: absolute;
+  right: 3%;
+  top: 3%;
+  padding: 0.5rem;
+  background: #1ed31e7b;
+  border-radius: 10px;
+  font-family: jetSet;
+  text-decoration: none;
+  color: #000;
+}
+
+
+#endpoints {
+  min-height: 50vh;
+}
+
+
+footer {
+  min-height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+footer a {
+  width: 5%;
+  margin: 0 2%;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+footer a img {
+  width: 100%;
+  height: auto;
+  min-width: 50px;
+}
