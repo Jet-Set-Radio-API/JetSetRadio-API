@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 import cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
+import MemoryCache from 'memory-cache';
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 const data = require('../utils/swagger-docs.json');
@@ -17,6 +18,7 @@ import { renderHome } from '../controllers/indexController.js';
 import { listCollections } from '../config/db.js';
 
 
+const cache = new MemoryCache.Cache();
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const healthCheckManager = new HealthCheckManager();
 const { CORE_DB, JSR_DB, JSRF_DB } = Constants;
@@ -35,7 +37,7 @@ class MiddlewareManager {
     app.get('/', (req, res) => renderHome(req, res));
     app.get('/health', (req, res) => res.send(healthCheckManager.getAppHealth()));
     app.get('/endpoints', async (req, res) => res.send(await filterPipeRoutes(req, listEndpoints(app))));
-    app.use('/v1/api', router);
+    app.use('/v1/api', cacheMiddleware, router);
     app.use('/docs', swaggerUi.serve, swaggerUi.setup(data))
   }
 
@@ -82,5 +84,31 @@ const filterPipeRoutes = async (req, endpoints) => {
   }
   return [...new Set(endpoints)];
 }
+
+const cacheMiddleware = (req, res, next) => {
+  const clientIp = req.ip; 
+  const cacheKey = `cache_${clientIp}_${req.originalUrl || req.url}`;
+
+  const cachedData = cache.get(cacheKey);
+  if (cachedData) {
+    console.log(`Cache hit for url ${req.url}`);
+    let parsedResponse;
+    try {
+      parsedResponse = JSON.parse(cachedData);
+    } catch (err) {
+      console.error(`Error parsing cached response for key ${cacheKey}: ${err}`);
+      cache.del(cacheKey);
+      return next();
+    }
+    return res.json(parsedResponse);
+  }
+  res.sendResponse = res.send;
+  res.send = (body) => {
+    cache.put(cacheKey, body, 3600000); // 1 hour cache time
+    res.sendResponse(body);
+  };
+  console.log(`Cache missed for url ${req.url}`);
+  next();
+};
 
 export default MiddlewareManager;
