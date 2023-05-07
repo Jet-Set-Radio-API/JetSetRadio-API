@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSRAPI - Documentation</title>
+  <link rel="stylesheet" href="/style/docs.css">
+</head>
+<body>
+  <div id="img-container" class="img">
+    <img src="./img/jsrapi-wallpaper.webp" alt="">
+    <h1 id="main-text">Jet Set Radio API <br> Documentation</h1>
+    <a id="home" href="./index.html">Home</a>
+    <a id="swagger" href="https://jetsetradio-api.onrender.com/docs/">Swagger Docs</a>
+  </div>
+  <div id="main">
+    <div id="main-inner">
+
+      <div class="main-container">
+        <h2>Introduction</h2>
+        <p>Welcome to the jsrapi, the Jet Set Radio API! This documentation should help get you familiar with which resources are available and how to consume them with HTTP requests.</p>
+      </div>
+  
+      <div class="main-container">
+        <h2>Base URL</h2>
+        <p>The Base URL is the root URL for all of the API. If you ever get an error performing a request check the BaseURL first.</p>
+        <p>The Base URL is: </p>
+        <code class="code-snippet">https://jetsetradio-api.onrender.com/v1/api/</code>
+      </div>
+  
+      <div class="main-container">
+        <h2>Authentication</h2>
+        <p>Swapi is a completely open API. No authentication is required. This means you are only able to do GET requests. If you find a mistake in the data, then send an email to the <a class="inline-a" href="mailto: jetsetradio.api@gmail.com">author</a> or post on issue on the <a class="inline-a" href="https://github.com/Jet-Set-Radio-API/JetSetRadio-API">github page</a>.</p>
+      </div>
+  
+      <div class="main-container">
+        <h2>Sorting</h2>
+        <p>All API routes support the <code class="code-snippet">sortBy</code> and <code class="code-snippet">orderBy</code> parameters. If orderBy is omitted, it will assume an ascending direction.</p>
+        <p>Example:</p>
+        <code class="code-snippet">https://jetsetradio-api.onrender.com/v1/api/characters/jsr?sortBy=name&orderBy=desc</code>
+      </div>
+  
+      <div class="main-container">
+        <h2>Limiting</h2>
+        <p>All API routes support the <code class="code-snippet">limit</code> parameter. You can use this to return a limited number of results instead of the entire response.</p>
+        <p>Example:</p>
+        <code class="code-snippet">https://jetsetradio-api.onrender.com/v1/api/locations/jsrf?limit=5</code>
+      </div>
+
+      <div class="main-container">
+        <h2>Swagger Docs</h2>
+        <p>You can use the <a class="inline-a" href="https://jetsetradio-api.onrender.com/docs/">swagger docs</a> to view the available endpoints, see their parameters, and test the routes out!</p>
+      </div>
+  
+      ___________________________________________________________
+      <div class="main-container">
+        <h2>Resources</h2>
+        <p>The following Resources are currently available to be consumed from. More resources will be added in the future.</p>
+        <ul>
+          <li>Games</li>
+          <li>Characters</li>
+          <li>Locations</li>
+          <li>Levels</li>
+          <li>GraffitiTags</li>
+          <li>Songs</li>
+          <li>Artists</li>
+        </ul>
+      </div>
+      <p>Each Resource is described more in detail below. An example request and response is provided for each resource. Note that the response won't always match exactly what is returned from the request. To get the most accurate data, it is best to try out the requests for yourself.</p>
+
+      <div class="main-container">
+        <h2>Games</h2>
+        <p>A Game is a resource describing a published game developed within the Jet Set Radio Franchise.</p>
+        <p>Endpoints:</p>
+        <ul>
+          <li><code class="code-snippet">/games</code> ==> Returns all Games</li>
+          <li><code class="code-snippet">/games/:id</code> ==> Returns a single Game by ID</li>
+        </ul>
+        <p>Example Request:</p>
+        <code class="code-snippet">https://jetsetradio-api.onrender.com/v1/api/games?name=Jet Set Radio Future</code>
+        <p>Example Response: <button class="expandable-button">Expand</button> </p>
+        <pre id="game-response" class="expandable code-snippet" style="display: none;"></pre>
+      </div>
+
+      <div class="main-container">
+        <h2>Characters</h2>
+        <p>A Character is a resource describing a character from a specific Game.</p>
+        <p>Endpoints:</p>
+        <ul>
+          <li><code class="code-snippet">/characters</code> ==> Returns all Characters</li>
+          <li><code class="code-snippet">/characters/jsr</code> ==> Returns all Jet Set Radio Characters</li>
+          <li><code class="code-snippet">/characters/jsr/:id</code> ==> Returns a single JSR Character by ID</li>
+          <li><code class="code-snippet">/characters/jsrf</code> ==> Returns all Jet Set Radio Future Characters</li>
+          <li><code class="code-snippet">/characters/jsrf/:id</code> ==> Returns a single JSRF Character by ID</li>
+        </ul>
+        <p>Example Request:</p>
+        <code class="code-snippet">https://jetsetradio-api.onrender.com/v1/api/characters/jsr</code>
+        <p>Example Response: <button class="expandable-button">Expand</button> </p>
+        <pre id="character-response" class="expandable code-snippet" style="display: none;"></pre>
+      </div>
+
+      <div class="main-container">
+        <h2>Locations</h2>
+        <p>A Location is a resource describing a location or place from a specific Game.</p>
+        <p>Endpoints:</p>
+        <ul>
+          <li><code class="code-snippet">/locations</code> ==> Returns all Locations</li>
+          <li><code class="code-snippet">/locations/jsr</code> ==> Returns all Jet Set Radio Locations</li>
+          <li><code class="code-snippet">/locations/jsr/:id</code> ==> Returns a single JSR Location by ID</li>
+          <li><code class="code-snippet">/locations/jsrf</code> ==> Returns all Jet Set Radio Future Locations</li>
+          <li><code class="code-snippet">/locations/jsrf/:id</code> ==> Returns a single JSRF Location by ID</li>
+        </ul>
+        <p>Example Request:</p>
+        <code class="code-snippet">https://jetsetradio-api.onrender.com/v1/api/locations?sortBy=name&limit=5</code>
+        <p>Example Response: <button class="expandable-button">Expand</button> </p>
+        <pre id="location-response" class="expandable code-snippet" style="display: none;"></pre>
+      </div>
+
+      <div class="main-container">
+        <h2>Levels</h2>
+        <p>A Level is a resource describing a level from Jet Set Radio/Jet Grind Radio.</p>
+        <p>Endpoints:</p>
+        <ul>
+          <li><code class="code-snippet">/levels</code> ==> Returns all Levels</li>
+          <li><code class="code-snippet">/locations/:id</code> ==> Returns a single Level by ID</li>
+        </ul>
+        <p>Example Request:</p>
+        <code class="code-snippet">https://jetsetradio-api.onrender.com/v1/api/levels?sortBy=chapter</code>
+        <p>Example Response: <button class="expandable-button">Expand</button> </p>
+        <pre id="level-response" class="expandable code-snippet" style="display: none;"></pre>
+      </div>
+
+      <div class="main-container">
+        <h2>Graffiti-Tags</h2>
+        <p>A Graffiti Tag is a resource describing a Graffiti Point from a specific Game.</p>
+        <p>Endpoints:</p>
+        <ul>
+          <li><code class="code-snippet">/graffiti-tags</code> ==> Returns all Graffiti-Tags</li>
+          <li><code class="code-snippet">/graffiti-tags/jsr</code> ==> Returns all Jet Set Radio Graffiti-Tags</li>
+          <li><code class="code-snippet">/graffiti-tags/jsr/:id</code> ==> Returns a single JSR Graffiti-Tag by ID</li>
+          <li><code class="code-snippet">/graffiti-tags/jsrf</code> ==> Returns all Jet Set Radio Future Graffiti-Tags</li>
+          <li><code class="code-snippet">/graffiti-tags/jsrf/:id</code> ==> Returns a single JSRF Graffiti-Tag by ID</li>
+        </ul>
+        <p>Example Request:</p>
+        <code class="code-snippet">https://jetsetradio-api.onrender.com/v1/api/graffiti-tags?sortBy=size&orderBy=desc</code>
+        <p>Example Response: <button class="expandable-button">Expand</button> </p>
+        <pre id="graffiti-tag-response" class="expandable code-snippet" style="display: none;"></pre>
+      </div>
+
+      <div class="main-container">
+        <h2>Songs</h2>
+        <p>A Song is a resource describing a song from a specific Game.</p>
+        <p>Endpoints:</p>
+        <ul>
+          <li><code class="code-snippet">/songs</code> ==> Returns all Songs</li>
+          <li><code class="code-snippet">/songs/jsr</code> ==> Returns all Jet Set Radio Songs</li>
+          <li><code class="code-snippet">/songs/jsr/:id</code> ==> Returns a single JSR Song by ID</li>
+          <li><code class="code-snippet">/songs/jsrf</code> ==> Returns all Jet Set Radio Future Songs</li>
+          <li><code class="code-snippet">/songs/jsrf/:id</code> ==> Returns a single JSRF Song by ID</li>
+        </ul>
+        <p>Example Request:</p>
+        <code class="code-snippet">https://jetsetradio-api.onrender.com/v1/api/songs?gameId=64285b7918c8a0231136dc5a</code>
+        <p>Example Response: <button class="expandable-button">Expand</button> </p>
+        <pre id="song-response" class="expandable code-snippet" style="display: none;"></pre>
+      </div>
+
+      <div class="main-container">
+        <h2>Artists</h2>
+        <p>An Artist is a resource describing an artist that created a Song.</p>
+        <p>Endpoints:</p>
+        <ul>
+          <li><code class="code-snippet">/artists</code> ==> Returns all Artists</li>
+          <li><code class="code-snippet">/artists/:id</code> ==> Returns a single Artist by ID</li>
+          <li><code class="code-snippet">/artists/:id/songs</code> ==> Returns all Songs by Artist</li>
+        </ul>
+        <p>Example Request:</p>
+        <code class="code-snippet">https://jetsetradio-api.onrender.com/v1/api/artists/643865b5af5362b86b844d75</code>
+        <p>Example Response: <button class="expandable-button">Expand</button> </p>
+        <pre id="artist-response" class="expandable code-snippet" style="display: none;"></pre>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <a href="https://github.com/Jet-Set-Radio-API/JetSetRadio-API"><img src="./img/github.webp" alt=""></a>
+    <a href="https://jetsetradio-api.onrender.com/docs/"><img src="./img/swagger.webp" alt=""></a>
+  </footer>
+
+  <script type="module" src="./js/docs.js"></script>
+</body>
+</html>
