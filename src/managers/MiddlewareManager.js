@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 import cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
+import rateLimit from 'express-rate-limit';
 import MemoryCache from 'memory-cache';
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
@@ -37,7 +38,7 @@ class MiddlewareManager {
     app.get('/', (req, res) => renderHome(req, res));
     app.get('/health', (req, res) => res.send(healthCheckManager.getAppHealth()));
     app.get('/endpoints', async (req, res) => res.send(await filterPipeRoutes(req, listEndpoints(app))));
-    app.use('/v1/api', cacheMiddleware, router);
+    app.use('/v1/api', [limiter, cacheMiddleware], router);
     app.use('/docs', swaggerUi.serve, swaggerUi.setup(data))
   }
 
@@ -84,6 +85,14 @@ const filterPipeRoutes = async (req, endpoints) => {
   }
   return [...new Set(endpoints)];
 }
+
+const limiter = rateLimit({
+  windowMs: 60 * 60 * 1000, // 1 hour time range
+  max: 1000, // 1000 requests limit
+  keyGenerator: (req) => { 
+    return req.ip;
+  },
+});
 
 const cacheMiddleware = (req, res, next) => {
   const clientIp = req.ip; 
