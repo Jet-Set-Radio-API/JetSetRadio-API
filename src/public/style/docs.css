@@ -9,13 +9,29 @@ a {
   color: #000;
 }
 
-.text-center {
-  text-align: center;
-}
-
 .inline-a {
   color: rgb(52, 52, 151);
 }
+
+.expandable {
+  display: none;
+}
+
+.expandable-button {
+  padding: 0 0.2rem;
+}
+
+.expandable-button::after {
+  content: "+";
+  font-size: 20px;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+
+.main-container p .expandable-button.expanded::after {
+  content: "-";
+  vertical-align: middle;
+} 
 
 @font-face {
   font-family: jetSet;
@@ -48,9 +64,10 @@ a {
   top: 50%;
   transform: translate(-50%,-50%);
   font-size: 5.5vw;
+  text-align: center;
 }
 
-#documentation {
+#home, #swagger {
   position: absolute;
   right: 3%;
   top: 3%;
@@ -59,6 +76,12 @@ a {
   border-radius: 10px;
   font-family: jetSet;
   font-size: calc(8px + 1vw);
+  text-decoration: none;
+  color: #000;
+}
+
+#swagger {
+  top: 11.5%;
 }
 
 #main {
@@ -67,15 +90,45 @@ a {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 5%;
+  padding: 3.5% 0;
 }
 
-#main > * {
-  margin: 0.5% 0;
+#main-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 60%;
+  margin-left: 1%;
+}
+
+#main-inner > .main-container {
+  margin: 1% 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 30%;
 }
 
 .main-container > * {
-  margin: 1% 0;
+  padding: 0.2rem;
+}
+
+.main-container p {
+  max-width: 650px;
+}
+
+.main-container ul {
+  margin-left: 5%;
+}
+
+.code-snippet {
+  background: #dddddd;
+  padding: 0.2rem 0.3rem;
+  margin-left: 0.2rem;
+  border-radius: 3px;
+  max-width: 700px;
 }
 
 footer {
