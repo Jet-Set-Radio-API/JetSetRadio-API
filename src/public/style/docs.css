@@ -15,6 +15,7 @@ a {
 
 .expandable {
   display: none;
+  min-width: 800px;
 }
 
 .expandable-button {
