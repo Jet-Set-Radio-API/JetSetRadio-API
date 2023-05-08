@@ -8,7 +8,7 @@ The actual data this application provides lives in MongoDB. This service perform
 
 ## Getting Started
 
-See the [DEV_SETUP](./DEV_SETUP.md) guide to learn how to set up a dev environment for this project
+See the [DEV_SETUP](./DEV_SETUP.md) guide to learn how to set up a dev environment for this project.
 
 If you need to change anything in `Admin`, you can start with the [README](https://github.com/Jet-Set-Radio-API/JetSetRadio-API-Admin/blob/main/README.md) for that project.
 
