@@ -33,6 +33,11 @@
         <h2>Authentication</h2>
         <p>Swapi is a completely open API. No authentication is required. This means you are only able to do GET requests. If you find a mistake in the data, then send an email to the <a class="inline-a" href="mailto: jetsetradio.api@gmail.com">author</a> or post on issue on the <a class="inline-a" href="https://github.com/Jet-Set-Radio-API/JetSetRadio-API">github page</a>.</p>
       </div>
+
+      <div class="main-container">
+        <h2>Rate Limiting</h2>
+        <p>A request limit has been set to avoid malicious abuse(if anyone were to do that!). Limiting is set per IP address. You can make a total of up to 1000 requests per hour.</p>
+      </div>
   
       <div class="main-container">
         <h2>Sorting</h2>
@@ -46,6 +51,11 @@
         <p>All API routes support the <code class="code-snippet">limit</code> parameter. You can use this to return a limited number of results instead of the entire response.</p>
         <p>Example:</p>
         <code class="code-snippet">https://jetsetradio-api.onrender.com/v1/api/locations/jsrf?limit=5</code>
+      </div>
+
+      <div class="main-container">
+        <h2>Caching</h2>
+        <p>All API routes utilize cache in memory to be able to serve content faster! The cache is automatically set to expire after 1 hour. The expiration is subject to future change.</p>
       </div>
 
       <div class="main-container">
