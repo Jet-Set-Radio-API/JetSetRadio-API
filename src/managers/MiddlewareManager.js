@@ -6,6 +6,7 @@ import cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
 import rateLimit from 'express-rate-limit';
 import MemoryCache from 'memory-cache';
+import favicon from 'serve-favicon';
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 const data = require('../utils/swagger-docs.json');
@@ -34,6 +35,7 @@ class MiddlewareManager {
     app.use(express.static(path.join(__dirname, '..', 'public')));
     app.use(express.urlencoded({ extended: true }));
     app.use(express.json());
+    app.use(favicon(path.join(__dirname, '..', 'public', 'img', 'favicon.ico')));
 
     app.get('/', (req, res) => renderHome(req, res));
     app.get('/health', (req, res) => res.send(healthCheckManager.getAppHealth()));
