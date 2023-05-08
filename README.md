@@ -1,7 +1,7 @@
 
 # <img src="https://storage.googleapis.com/jetsetradio-api-core/images/jsr-logo.png" width=6% />  JetSetRadio-API
 
-Easily consume Jet Set Radio data into your applications! This API includes data from both JSR and JSRF. This service is connected to [JetSetRadio-API-Admin](https://github.com/Jet-Set-Radio-API/JetSetRadio-API-Admin) which is an ETL service that manages the data this application uses.
+Easily consume Jet Set Radio data into your applications! This API includes data from both JSR and JSRF. This service is dependent on [JetSetRadio-API-Admin](https://github.com/Jet-Set-Radio-API/JetSetRadio-API-Admin) which is an ETL service that manages the data this application uses.
 
 
 ## Purpose
@@ -19,8 +19,7 @@ The only dependency this project has is a mongo database.
 
 
 ## Endpoints and DOCS
- - View all endpoints on the [Endpoints Page]() (Coming Soon)
- - For developer documentation, see the [Swagger Docs](https://jetsetradio-api.onrender.com/docs)
+ - View all endpoints on the [Docs Page](https://jetsetradio-api.onrender.com/docs.html) or the [Swagger Docs](https://jetsetradio-api.onrender.com/docs)
 
 
 ## Integrations
@@ -31,7 +30,7 @@ The only dependency this project has is a mongo database.
 
 ## Contributing
 I am open and welcome to ALL contributions!
-To get started, see the [DOCS]() on how to set up a dev environment (Coming Soon)
+To get started, see the [DOCS](https://github.com/Jet-Set-Radio-API/JetSetRadio-API/blob/main/src/docs/DEV_SETUP.md) on how to set up a dev environment.
 
 Please submit a Pull Request off of main with your proposed changes. 
 You can also submit an issue if you find something wrong, have questions, or want to discuss something further.
