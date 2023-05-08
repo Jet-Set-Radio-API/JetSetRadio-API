@@ -29,8 +29,9 @@ The only dependency this project has is a mongo database.
 
 
 ## Contributing
-I am open and welcome to ALL contributions!
-To get started, see the [DOCS](https://github.com/Jet-Set-Radio-API/JetSetRadio-API/blob/main/src/docs/DEV_SETUP.md) on how to set up a dev environment.
+I am open and welcome to ALL contributions.
+
+See the [Contributing Docs](https://github.com/Jet-Set-Radio-API/JetSetRadio-API/blob/main/src/docs/DEV_SETUP.md) to get started! 
 
 Please submit a Pull Request off of main with your proposed changes. 
 You can also submit an issue if you find something wrong, have questions, or want to discuss something further.
