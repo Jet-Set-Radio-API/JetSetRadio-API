@@ -16,7 +16,7 @@ dotenv.config();
 import Constants from '../constants/dbConstants.js';
 import HealthCheckManager from './HealthCheckManager.js';
 import router from '../routes/router.js';
-import { renderHome } from '../controllers/indexController.js';
+import { renderHome, renderDocs } from '../controllers/indexController.js';
 import { listCollections } from '../config/db.js';
 
 
@@ -38,10 +38,11 @@ class MiddlewareManager {
     app.use(favicon(path.join(__dirname, '..', 'public', 'img', 'favicon.ico')));
 
     app.get('/', (req, res) => renderHome(req, res));
+    app.get('/docs', (req, res) => renderDocs(req, res));
     app.get('/health', (req, res) => res.send(healthCheckManager.getAppHealth()));
     app.get('/endpoints', async (req, res) => res.send(await filterPipeRoutes(req, listEndpoints(app))));
     app.use('/v1/api', [limiter, cacheMiddleware], router);
-    app.use('/docs', swaggerUi.serve, swaggerUi.setup(data))
+    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(data))
   }
 
 }

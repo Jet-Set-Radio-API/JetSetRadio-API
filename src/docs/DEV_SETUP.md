@@ -9,7 +9,7 @@ This page will guide you on setting up a development environment for this projec
 
 ## Steps
 
-1. Clone the Project
+1. Fork the project then clone it. Example:
     ```sh
     git clone git@github.com:Jet-Set-Radio-API/JetSetRadio-API.git
     ```
@@ -21,11 +21,31 @@ This page will guide you on setting up a development environment for this projec
 
 4. Obtain the database Connection URI
 
-5. Fill out a .env file; it needs to be renamed to ```qa.env```
+5. Fill out a .env file. You can use the [.env.example](./../../.env.example) file as a template. it needs to be renamed to ```qa.env```
     - Reference this example uri with yours to extract what is needed for the .env file
     ``` 
-    mongodb+srv://<USERNAME>:<PASSWORD>@<CLUSTER>.<DOMAIN>?retryWrites=true&w=majority
+    mongodb+srv://<USER>:<PASSWORD>@<CLUSTER>.<DOMAIN>?retryWrites=true&w=majority
     ```
+
+    qa.env example
+    ```
+    PORT=
+    BASE_URL=http://localhost:<PORT>
+    LOG_LEVEL=info
+
+    # MONGO CONNECT (get from connection string)
+    MONGO_USER=
+    MONGO_PASS=
+    MONGO_CLUSTER=
+    MONGO_DOMAIN=
+
+    # MONGO DATABASES (names do not matter)
+    JSR_DB=
+    JSRF_DB=
+    CORE_DB=
+    ```
+    The databases section in the env file are names of the databases. For development purposes it does not matter what these names are just as long as you can distinguish one from the other and you know which one is Core, JSR, or JSRF. 
+
 6. Run the project 
     ```sh
     npm run qa
