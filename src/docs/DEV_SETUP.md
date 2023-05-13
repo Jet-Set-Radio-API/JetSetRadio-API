@@ -9,7 +9,7 @@ This page will guide you on setting up a development environment for this projec
 
 ## Steps
 
-1. Clone the Project
+1. Fork the project then clone it. Example:
     ```sh
     git clone git@github.com:Jet-Set-Radio-API/JetSetRadio-API.git
     ```

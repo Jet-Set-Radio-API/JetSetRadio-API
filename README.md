@@ -19,7 +19,7 @@ The only dependency this project has is a mongo database.
 
 
 ## Endpoints and DOCS
- - View all endpoints on the [Docs Page](https://jetsetradio-api.onrender.com/docs.html) or the [Swagger Docs](https://jetsetradio-api.onrender.com/docs)
+ - View all endpoints on the [Docs Page](https://jetsetradio-api.onrender.com/docs) or the [Swagger Docs](https://jetsetradio-api.onrender.com/api-docs)
 
 
 ## Integrations
