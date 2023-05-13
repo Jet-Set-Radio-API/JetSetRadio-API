@@ -31,6 +31,8 @@ The only dependency this project has is a mongo database.
 ## Contributing
 I am open and welcome to ALL contributions.
 
+Currently, I have plans to add more Resources to the API. See the [Issues](https://github.com/Jet-Set-Radio-API/JetSetRadio-API/issues) page to see a list of resources still yet to be implemented.
+
 See the [Contributing Docs](./src/docs/CONTRIBUTE.md) to get started! 
 
 Please submit a Pull Request off of main with your proposed changes. 
