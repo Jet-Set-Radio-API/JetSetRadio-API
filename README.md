@@ -1,5 +1,5 @@
 
-# <img src="https://storage.googleapis.com/jetsetradio-api-core/images/jsr-logo.png" width=6% />  JetSetRadio-API
+# <img src="https://media-library-swgu.netlify.app/images/jsr-logo.png" width=6% />  JetSetRadio-API
 
 Easily consume Jet Set Radio data into your applications! This API includes data from both JSR and JSRF. This service is dependent on [JetSetRadio-API-Admin](https://github.com/Jet-Set-Radio-API/JetSetRadio-API-Admin) which is an ETL service that manages the data this application uses.
 
