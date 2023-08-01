@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "JetSetRadio-API",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "description": "Providing data for all things JSR and JSRF!"
   },
   "host": "localhost:8080",
