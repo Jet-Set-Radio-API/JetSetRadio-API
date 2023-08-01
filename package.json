@@ -1,6 +1,6 @@
 {
   "name": "jetsetradio-api",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A Data Provider relating to the JSR/JSRF universe",
   "type": "module",
   "main": "src/app.js",
@@ -24,7 +24,7 @@
     "express-rate-limit": "^6.7.0",
     "memory-cache": "^0.2.0",
     "mongodb": "^5.1.0",
-    "nodemon": "^2.0.22",
+    "nodemon": "^3.0.1",
     "serve-favicon": "^2.5.0",
     "swagger-autogen": "^2.23.1",
     "swagger-ui-express": "^4.6.2",
