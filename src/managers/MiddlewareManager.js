@@ -3,6 +3,7 @@ import listEndpoints from 'express-list-endpoints';
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 import cors from 'cors';
+import * as bcrypt from 'bcrypt';
 import swaggerUi from 'swagger-ui-express';
 import rateLimit from 'express-rate-limit';
 import MemoryCache from 'memory-cache';
@@ -18,6 +19,9 @@ import HealthCheckManager from './HealthCheckManager.js';
 import router from '../routes/router.js';
 import { renderHome, renderDocs } from '../controllers/indexController.js';
 import { listCollections } from '../config/db.js';
+import LOGGER from '../utils/logger.js';
+import { Actions } from '../config/dbActions.js';
+import { performCoreAdminAction } from '../config/db.js';
 
 
 const cache = new MemoryCache.Cache();
@@ -41,6 +45,7 @@ class MiddlewareManager {
     app.get('/docs', (req, res) => renderDocs(req, res));
     app.get('/health', (req, res) => res.send(healthCheckManager.getAppHealth()));
     app.get('/endpoints', async (req, res) => res.send(await filterPipeRoutes(req, listEndpoints(app))));
+    app.post('/cache/clear', async (req, res) => await clearCache(req, res));
     app.use('/v1/api', [limiter, cacheMiddleware], router);
     app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(data))
   }
@@ -103,12 +108,12 @@ const cacheMiddleware = (req, res, next) => {
 
   const cachedData = cache.get(cacheKey);
   if (cachedData) {
-    console.log(`Cache hit for url ${req.url}`);
+    LOGGER.info(`Cache hit for url ${req.url}`);
     let parsedResponse;
     try {
       parsedResponse = JSON.parse(cachedData);
     } catch (err) {
-      console.error(`Error parsing cached response for key ${cacheKey}: ${err}`);
+      LOGGER.error(`Error parsing cached response for key ${cacheKey}: ${err}`);
       cache.del(cacheKey);
       return next();
     }
@@ -116,11 +121,40 @@ const cacheMiddleware = (req, res, next) => {
   }
   res.sendResponse = res.send;
   res.send = (body) => {
-    cache.put(cacheKey, body, 3600000); // 1 hour cache time
+    cache.put(cacheKey, body, 3600000); // 1 hour cache time, restart the service to bypass
     res.sendResponse(body);
   };
-  console.log(`Cache missed for url ${req.url}`);
+  LOGGER.info(`Cache missed for url ${req.url}`);
   next();
 };
+
+const clearCache = async (req, res) => {
+  const username = req?.body?.username;
+  const password = req?.body?.password;
+  const adminUser = await performCoreAdminAction(Actions.fetchAdmin, username);
+  if (!adminUser) {
+    LOGGER.error('Admin User Not Found');
+    return res.status(400).send()
+  }
+  const authenticated = await validatePassword(password, adminUser?.password);
+  if (!authenticated) {
+    LOGGER.error('Invalid Admin Creds!');
+    return res.status(401).send('Unauthorized');
+  }
+  if (adminUser && authenticated) {
+    cache.clear();
+    LOGGER.info('All Caches Cleared');
+    return res.send('Cache Cleared');
+  }
+  res.status(500).send('Unexpected Behavior');
+}
+
+const validatePassword = async (password, hashedPassword) => {
+  try {
+    return await bcrypt.compare(password, hashedPassword);
+  } catch (err) {
+    LOGGER.warn(`Error validating Admin password ${err}`);
+  }
+}
 
 export default MiddlewareManager;
