@@ -32,6 +32,18 @@ const buildMongoUri = () => {
 const client = new MongoClient(buildMongoUri());
 
 /* Database Connections */
+export const performCoreAdminAction = async (action, username) => {
+  try {
+    await client.connect();
+    return await action(client, CORE_DB, 'Admin', username);
+  } catch(err) {
+    console.error(err);
+    return err;
+  } finally {
+    await client.close();
+  }
+}
+
 export const performCoreAction = async (action, collection, id, qps) => {
   try {
     await client.connect();
