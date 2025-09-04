@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { getSongs, getJSRSongs, getJSRSongById, getJSRFSongs, getJSRFSongById } from '../controllers/songController.js';
+import { getSongs, getJSRSongs, getJSRSongById, getJSRFSongs, getJSRFSongById, getBRCSongs, getBRCSongById } from '../controllers/songController.js';
 
 
 const songs = express.Router();
@@ -10,5 +10,7 @@ songs.get('/jsr', async (req, res) => /* #swagger.tags = ['Songs'] */ await getJ
 songs.get('/jsr/:id', async (req, res) => /* #swagger.tags = ['Songs'] */ await getJSRSongById(req, res));
 songs.get('/jsrf', async (req, res) => /* #swagger.tags = ['Songs'] */ await getJSRFSongs(req, res));
 songs.get('/jsrf/:id', async (req, res) => /* #swagger.tags = ['Songs'] */ await getJSRFSongById(req, res));
+songs.get('/brc', async (req, res) => /* #swagger.tags = ['Songs'] */ await getBRCSongs(req, res));
+songs.get('/brc/:id', async (req, res) => /* #swagger.tags = ['Songs'] */ await getBRCSongById(req, res));
 
 export default songs;

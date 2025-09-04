@@ -1,4 +1,4 @@
-import { performCoreAction, performJSRAction, performJSRFAction } from "../config/db.js";
+import { performBRCAction, performCoreAction, performJSRAction, performJSRFAction } from "../config/db.js";
 import { Actions } from "../config/dbActions.js";
 import { ObjectId } from "mongodb";
 
@@ -40,7 +40,6 @@ export const getSongsByArtist = async (req, res) => {
   } catch(err) {
     res.status(500).send(`Could not fetch Songs by Artist with ID: ${req.params.id} \n${err}`);
   }
-  
 }
 
 
@@ -55,11 +54,15 @@ export const fetchSongsByArtistId = async (artistId) => {
   const songs = [];
   const jsrSongs = await performJSRAction(Actions.fetchWithQuery, Song, null, { artistId: new ObjectId(artistId) });
   const jsrfSongs = await performJSRFAction(Actions.fetchWithQuery, Song, null, { artistId: new ObjectId(artistId) });
+  const brcSongs = await performBRCAction(Actions.fetchWithQuery, Song, null, { artistId: new ObjectId(artistId) });
   if (jsrSongs && jsrSongs.length > 0) {
     songs.push(jsrSongs);
   }
   if (jsrfSongs && jsrfSongs.length > 0) {
     songs.push(jsrfSongs);
+  }
+  if (brcSongs && brcSongs.length > 0) {
+    songs.push(brcSongs);
   }
   return songs.flat(1);
 }
