@@ -422,6 +422,40 @@
         }
       }
     },
+    "/characters/brc": {
+      "get": {
+        "tags": [
+          "Characters"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/characters/brc/{id}": {
+      "get": {
+        "tags": [
+          "Characters"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/locations/": {
       "get": {
         "tags": [

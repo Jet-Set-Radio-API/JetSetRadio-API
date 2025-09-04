@@ -46,6 +46,14 @@ export const getJSRFCharacters = async (req, res) => {
   }
 };
 
+export const getBRCCharacters = async (req, res) => {
+  try {
+    res.send(await fetchBRCCharacters(req));
+  } catch (err) {
+    LOGGER.error(`Could not fetch BRC Characters \n${err}`);
+  }
+};
+
 export const getJSRCharacterById = async (req, res) => {
   try {
     const id = req?.params?.id;
@@ -61,6 +69,15 @@ export const getJSRFCharacterById = async (req, res) => {
     res.send(await performJSRFAction(Actions.fetchById, Character, id));
   } catch (err) {
     LOGGER.error(`Could not fetch JSRF Character With ID: ${id} \n${err}`);
+  }
+};
+
+export const getBRCCharacterById = async (req, res) => {
+  try {
+    const id = req?.params?.id;
+    res.send(await performBRCAction(Actions.fetchById, Character, id));
+  } catch (err) {
+    LOGGER.error(`Could not fetch BRC Character With ID: ${id} \n${err}`);
   }
 };
 
