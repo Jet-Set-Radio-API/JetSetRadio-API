@@ -78,6 +78,7 @@
           <li>Graffiti Tags</li>
           <li>Songs</li>
           <li>Artists</li>
+          <li>Collectibles</li>
         </ul>
         <p>The following Resources will be added in a future release of JSRAPI.</p>
         <p>If you would like to contribute in adding any of these resources, see the Contributing Docs.</p>
@@ -117,6 +118,8 @@
           <li><code class="code-snippet">/characters/jsr/:id</code> ==> Returns a single JSR Character by ID</li>
           <li><code class="code-snippet">/characters/jsrf</code> ==> Returns all Jet Set Radio Future Characters</li>
           <li><code class="code-snippet">/characters/jsrf/:id</code> ==> Returns a single JSRF Character by ID</li>
+          <li><code class="code-snippet">/characters/brc</code> ==> Returns all Bomb Rush Cyberfunk Characters</li>
+          <li><code class="code-snippet">/characters/brc/:id</code> ==> Returns a single BRC Character by ID</li>
         </ul>
         <p>Example Request:</p>
         <code class="code-snippet">https://jetsetradio-api.onrender.com/v1/api/characters/jsr</code>
@@ -134,6 +137,8 @@
           <li><code class="code-snippet">/locations/jsr/:id</code> ==> Returns a single JSR Location by ID</li>
           <li><code class="code-snippet">/locations/jsrf</code> ==> Returns all Jet Set Radio Future Locations</li>
           <li><code class="code-snippet">/locations/jsrf/:id</code> ==> Returns a single JSRF Location by ID</li>
+          <li><code class="code-snippet">/locations/brc</code> ==> Returns all Bomb Rush Cyberfunk Locations</li>
+          <li><code class="code-snippet">/locations/brc/:id</code> ==> Returns a single BRC Location by ID</li>
         </ul>
         <p>Example Request:</p>
         <code class="code-snippet">https://jetsetradio-api.onrender.com/v1/api/locations?sortBy=name&limit=5</code>
@@ -182,6 +187,8 @@
           <li><code class="code-snippet">/songs/jsr/:id</code> ==> Returns a single JSR Song by ID</li>
           <li><code class="code-snippet">/songs/jsrf</code> ==> Returns all Jet Set Radio Future Songs</li>
           <li><code class="code-snippet">/songs/jsrf/:id</code> ==> Returns a single JSRF Song by ID</li>
+          <li><code class="code-snippet">/songs/brc</code> ==> Returns all Bomb Rush Cyberfunk Songs</li>
+          <li><code class="code-snippet">/songs/brc/:id</code> ==> Returns a single BRC Song by ID</li>
         </ul>
         <p>Example Request:</p>
         <code class="code-snippet">https://jetsetradio-api.onrender.com/v1/api/songs?gameId=64285b7918c8a0231136dc5a</code>
@@ -202,6 +209,20 @@
         <code class="code-snippet">https://jetsetradio-api.onrender.com/v1/api/artists/643865b5af5362b86b844d75</code>
         <p>Example Response: <button class="expandable-button">Expand</button> </p>
         <pre id="artist-response" class="expandable code-snippet" style="display: none;"></pre>
+      </div>
+
+      <div class="main-container">
+        <h2>Collectibles</h2>
+        <p>A Collectible is a resource describing a location or place from a specific Game. The only supported game currently is Bomb Rush Cyberfunk.</p>
+        <p>Endpoints:</p>
+        <ul>
+          <li><code class="code-snippet">/collectibles</code> ==> Returns all Collectibles</li>
+          <li><code class="code-snippet">/collectibles/:id</code> ==> Returns a single Collectible by ID</li>
+        </ul>
+        <p>Example Request:</p>
+        <code class="code-snippet">https://jetsetradio-api.onrender.com/v1/api/collectibles?sortBy=name&limit=5</code>
+        <p>Example Response: <button class="expandable-button">Expand</button> </p>
+        <pre id="collectible-response" class="expandable code-snippet" style="display: none;"></pre>
       </div>
 
     </div>

@@ -1,4 +1,4 @@
-import { performJSRAction, performJSRFAction } from "../config/db.js";
+import { performJSRAction, performJSRFAction, performBRCAction } from "../config/db.js";
 import { Actions } from "../config/dbActions.js";
 import { sortObjects } from "../utils/utility.js";
 
@@ -11,11 +11,12 @@ export const getSongs = async (req, res) => {
     const sortOrder = req?.query?.orderBy ? req?.query?.orderBy : 'asc';
     const jsrSongs = await fetchJSRSongs(req);
     const jsrfSongs = await fetchJSRFSongs(req);
+    const brcSongs = await fetchBRCSongs(req);
     if (sortByValue) {
-      const songs = [...jsrSongs, ...jsrfSongs];
+      const songs = [...jsrSongs, ...jsrfSongs, ...brcSongs];
       return res.send(songs.sort(sortObjects(sortByValue, sortOrder)));
     }
-    res.send([...jsrSongs, ...jsrfSongs]);
+    res.send([...jsrSongs, ...jsrfSongs, ...brcSongs]);
   } catch(err) {
     res.status(500).send(`Could not fetch ALL SONGS due to error: \n${err}`);
   }
@@ -69,10 +70,38 @@ export const getJSRFSongById = async (req, res) => {
   }
 }
 
+export const getBRCSongs = async (req, res) => {
+  try {
+    const brcSongs = await fetchBRCSongs(req);
+    if (brcSongs) {
+      return res.send(brcSongs);
+    }
+    res.status(404).send();
+  } catch(err) {
+    res.status(500).send(`Could not fetch BRC Songs \n${err}`);
+  }
+}
+
+export const getBRCSongById = async (req, res) => {
+  try {
+    const brcSong = await performBRCAction(Actions.fetchById, Song, id);
+    if (brcSong) {
+      return res.send(brcSong);
+    }
+    res.status(404).send(`BRC Song Resource could not be found at requested location`);
+  } catch(err) {
+    res.status(500).send(`Could not fetch BRC SONG with ID: ${req.params.id} \n${err}`);
+  }
+}
+
 export const fetchJSRSongs = async (req) => {
   return await performJSRAction(Actions.fetchWithQuery, Song, null, req?.query);
 }
   
 export const fetchJSRFSongs = async (req) => {
   return await performJSRFAction(Actions.fetchWithQuery, Song, null, req?.query);
+}
+
+export const fetchBRCSongs = async (req) => {
+  return await performBRCAction(Actions.fetchWithQuery, Song, null, req?.query);
 }
