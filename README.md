@@ -1,7 +1,10 @@
 
 # <img src="https://media-library-swgu.netlify.app/jetsetradio-api-core/jsr-logo.png" width=6% />  JetSetRadio-API
 
-Easily consume Jet Set Radio data into your applications! This public API includes data from both JSR and JSRF. 
+Easily consume Jet Set Radio data into your applications! This public API includes data from: 
+ - Jet Set Radio
+ - Jet Set Radio Future
+ - Bomb Rush Cyberfunk 
 
 
 ## Purpose
