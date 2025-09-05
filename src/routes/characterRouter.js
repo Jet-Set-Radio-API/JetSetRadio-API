@@ -1,10 +1,11 @@
 import express from 'express';
-import { getAllCharacters, getJSRCharacters, getJSRFCharacters, getJSRCharacterById, getJSRFCharacterById, getBRCCharacters, getBRCCharacterById } from '../controllers/characterController.js';
+import { getAllCharacters, getRandomCharacter, getJSRCharacters, getJSRFCharacters, getJSRCharacterById, getJSRFCharacterById, getBRCCharacters, getBRCCharacterById } from '../controllers/characterController.js';
 
 
 const characters = express.Router();
 
 characters.get('/', async (req, res) => /* #swagger.tags = ['Characters'] */ await getAllCharacters(req, res));
+characters.get('/random', async (req, res) => /* #swagger.tags = ['Characters'] */ await getRandomCharacter(req, res));
 characters.get('/jsr', async (req, res) => /* #swagger.tags = ['Characters'] */ await getJSRCharacters(req, res));
 characters.get('/jsr/:id', async (req, res) => /* #swagger.tags = ['Characters'] */ await getJSRCharacterById(req, res));
 characters.get('/jsrf', async (req, res) => /* #swagger.tags = ['Characters'] */ await getJSRFCharacters(req, res));
