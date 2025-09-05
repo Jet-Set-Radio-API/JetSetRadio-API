@@ -1,3 +1,4 @@
+import {all} from "axios";
 import {
   performJSRAction,
   performJSRFAction,
@@ -27,6 +28,28 @@ export const getAllCharacters = async (req, res) => {
     res.send([...jsrCharacters, ...jsrfCharacters, ...brcCharacters]);
   } catch (err) {
     LOGGER.error(`Could not fetch ALL Characters \n${err}`);
+  }
+};
+
+export const getRandomCharacter = async (req, res) => {
+  try {
+    const jsrCharacters = await fetchJSRCharacters(req);
+    const jsrfCharacters = await fetchJSRFCharacters(req);
+    const brcCharacters = await fetchBRCCharacters(req);
+
+    const allCharacters = [
+      ...jsrCharacters,
+      ...jsrfCharacters,
+      ...brcCharacters,
+    ];
+
+    const randomCharacter =
+      allCharacters[Math.floor(Math.random() * allCharacters.length)];
+
+    res.json(randomCharacter);
+  } catch (err) {
+    LOGGER.error(`Could not fetch random character \n${err}`);
+    res.status(500).json({error: "Failed to fetch random character"});
   }
 };
 

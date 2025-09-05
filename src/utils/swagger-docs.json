@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "JetSetRadio-API",
-    "version": "1.0.4",
+    "version": "1.1.0",
     "description": "Providing data for all things JSR and JSRF!"
   },
   "host": "localhost:9005",
@@ -37,16 +37,11 @@
       "description": "Artist Data from JSR and JSRF"
     }
   ],
-  "schemes": [
-    "https",
-    "http"
-  ],
+  "schemes": ["https", "http"],
   "paths": {
     "/games/": {
       "get": {
-        "tags": [
-          "Games"
-        ],
+        "tags": ["Games"],
         "description": "",
         "responses": {
           "200": {
@@ -60,9 +55,7 @@
     },
     "/games/{id}": {
       "get": {
-        "tags": [
-          "Games"
-        ],
+        "tags": ["Games"],
         "description": "",
         "parameters": [
           {
@@ -81,9 +74,7 @@
     },
     "/songs/": {
       "get": {
-        "tags": [
-          "Songs"
-        ],
+        "tags": ["Songs"],
         "description": "",
         "responses": {
           "200": {
@@ -97,9 +88,7 @@
     },
     "/songs/jsr": {
       "get": {
-        "tags": [
-          "Songs"
-        ],
+        "tags": ["Songs"],
         "description": "",
         "responses": {
           "200": {
@@ -116,9 +105,7 @@
     },
     "/songs/jsr/{id}": {
       "get": {
-        "tags": [
-          "Songs"
-        ],
+        "tags": ["Songs"],
         "description": "",
         "parameters": [
           {
@@ -143,9 +130,7 @@
     },
     "/songs/jsrf": {
       "get": {
-        "tags": [
-          "Songs"
-        ],
+        "tags": ["Songs"],
         "description": "",
         "responses": {
           "200": {
@@ -162,9 +147,7 @@
     },
     "/songs/jsrf/{id}": {
       "get": {
-        "tags": [
-          "Songs"
-        ],
+        "tags": ["Songs"],
         "description": "",
         "parameters": [
           {
@@ -189,9 +172,7 @@
     },
     "/songs/brc": {
       "get": {
-        "tags": [
-          "Songs"
-        ],
+        "tags": ["Songs"],
         "description": "",
         "responses": {
           "200": {
@@ -208,9 +189,7 @@
     },
     "/songs/brc/{id}": {
       "get": {
-        "tags": [
-          "Songs"
-        ],
+        "tags": ["Songs"],
         "description": "",
         "parameters": [
           {
@@ -235,9 +214,7 @@
     },
     "/artists/": {
       "get": {
-        "tags": [
-          "Artists"
-        ],
+        "tags": ["Artists"],
         "description": "",
         "responses": {
           "200": {
@@ -254,9 +231,7 @@
     },
     "/artists/{id}": {
       "get": {
-        "tags": [
-          "Artists"
-        ],
+        "tags": ["Artists"],
         "description": "",
         "parameters": [
           {
@@ -281,9 +256,7 @@
     },
     "/artists/{id}/songs": {
       "get": {
-        "tags": [
-          "Artists"
-        ],
+        "tags": ["Artists"],
         "description": "",
         "parameters": [
           {
@@ -308,9 +281,7 @@
     },
     "/graffiti-tags/": {
       "get": {
-        "tags": [
-          "GraffitiTags"
-        ],
+        "tags": ["GraffitiTags"],
         "description": "",
         "responses": {
           "200": {
@@ -321,9 +292,7 @@
     },
     "/graffiti-tags/jsr": {
       "get": {
-        "tags": [
-          "GraffitiTags"
-        ],
+        "tags": ["GraffitiTags"],
         "description": "",
         "responses": {
           "200": {
@@ -334,9 +303,7 @@
     },
     "/graffiti-tags/jsr/{id}": {
       "get": {
-        "tags": [
-          "GraffitiTags"
-        ],
+        "tags": ["GraffitiTags"],
         "description": "",
         "parameters": [
           {
@@ -355,9 +322,7 @@
     },
     "/graffiti-tags/jsrf": {
       "get": {
-        "tags": [
-          "GraffitiTags"
-        ],
+        "tags": ["GraffitiTags"],
         "description": "",
         "responses": {
           "200": {
@@ -368,9 +333,7 @@
     },
     "/graffiti-tags/jsrf/{id}": {
       "get": {
-        "tags": [
-          "GraffitiTags"
-        ],
+        "tags": ["GraffitiTags"],
         "description": "",
         "parameters": [
           {
@@ -389,9 +352,7 @@
     },
     "/characters/": {
       "get": {
-        "tags": [
-          "Characters"
-        ],
+        "tags": ["Characters"],
         "description": "",
         "responses": {
           "200": {
@@ -400,11 +361,23 @@
         }
       }
     },
+    "/characters/random": {
+      "get": {
+        "tags": ["Characters"],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/characters/jsr": {
       "get": {
-        "tags": [
-          "Characters"
-        ],
+        "tags": ["Characters"],
         "description": "",
         "responses": {
           "200": {
@@ -415,9 +388,7 @@
     },
     "/characters/jsr/{id}": {
       "get": {
-        "tags": [
-          "Characters"
-        ],
+        "tags": ["Characters"],
         "description": "",
         "parameters": [
           {
@@ -436,9 +407,7 @@
     },
     "/characters/jsrf": {
       "get": {
-        "tags": [
-          "Characters"
-        ],
+        "tags": ["Characters"],
         "description": "",
         "responses": {
           "200": {
@@ -449,9 +418,7 @@
     },
     "/characters/jsrf/{id}": {
       "get": {
-        "tags": [
-          "Characters"
-        ],
+        "tags": ["Characters"],
         "description": "",
         "parameters": [
           {
@@ -470,9 +437,7 @@
     },
     "/characters/brc": {
       "get": {
-        "tags": [
-          "Characters"
-        ],
+        "tags": ["Characters"],
         "description": "",
         "responses": {
           "200": {
@@ -483,9 +448,7 @@
     },
     "/characters/brc/{id}": {
       "get": {
-        "tags": [
-          "Characters"
-        ],
+        "tags": ["Characters"],
         "description": "",
         "parameters": [
           {
@@ -504,9 +467,7 @@
     },
     "/locations/": {
       "get": {
-        "tags": [
-          "Locations"
-        ],
+        "tags": ["Locations"],
         "description": "",
         "responses": {
           "200": {
@@ -517,9 +478,7 @@
     },
     "/locations/jsr": {
       "get": {
-        "tags": [
-          "Locations"
-        ],
+        "tags": ["Locations"],
         "description": "",
         "responses": {
           "200": {
@@ -530,9 +489,7 @@
     },
     "/locations/jsr/{id}": {
       "get": {
-        "tags": [
-          "Locations"
-        ],
+        "tags": ["Locations"],
         "description": "",
         "parameters": [
           {
@@ -551,9 +508,7 @@
     },
     "/locations/jsrf": {
       "get": {
-        "tags": [
-          "Locations"
-        ],
+        "tags": ["Locations"],
         "description": "",
         "responses": {
           "200": {
@@ -564,9 +519,7 @@
     },
     "/locations/jsrf/{id}": {
       "get": {
-        "tags": [
-          "Locations"
-        ],
+        "tags": ["Locations"],
         "description": "",
         "parameters": [
           {
@@ -585,9 +538,7 @@
     },
     "/locations/brc": {
       "get": {
-        "tags": [
-          "Locations"
-        ],
+        "tags": ["Locations"],
         "description": "",
         "responses": {
           "200": {
@@ -598,9 +549,7 @@
     },
     "/locations/brc/{id}": {
       "get": {
-        "tags": [
-          "Locations"
-        ],
+        "tags": ["Locations"],
         "description": "",
         "parameters": [
           {
@@ -619,9 +568,7 @@
     },
     "/levels/": {
       "get": {
-        "tags": [
-          "Levels"
-        ],
+        "tags": ["Levels"],
         "description": "",
         "responses": {
           "200": {
@@ -632,9 +579,7 @@
     },
     "/levels/{id}": {
       "get": {
-        "tags": [
-          "Levels"
-        ],
+        "tags": ["Levels"],
         "description": "",
         "parameters": [
           {
@@ -653,9 +598,7 @@
     },
     "/collectibles/": {
       "get": {
-        "tags": [
-          "Collectible"
-        ],
+        "tags": ["Collectibles"],
         "description": "",
         "responses": {
           "200": {
@@ -666,9 +609,7 @@
     },
     "/collectibles/{id}": {
       "get": {
-        "tags": [
-          "Collectible"
-        ],
+        "tags": ["Collectibles"],
         "description": "",
         "parameters": [
           {
