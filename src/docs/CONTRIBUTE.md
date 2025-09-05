@@ -25,6 +25,7 @@ Src
  - `Utils`: A list of helper functions and services such as winston logging and swagger doc configs
 
 Test
+ - `Data`: Contains test data used for application unit tests
  - `Helper`: Contains a list of fuctions to use the `mongodb-memory-server` in integration tests.
  - Every other file contains unit and integration tests relating to a specific resource.
 

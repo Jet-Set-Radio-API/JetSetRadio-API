@@ -5,9 +5,9 @@ class HealthCheckManager {
     return {
       uptimeInSeconds: process.uptime(),
       responseTime: process.hrtime(),
-      message: 'OK',
+      message: "OK",
       timestamp: process.hrtime(),
-      nodeVersion: process.version
+      nodeVersion: process.version,
     };
   }
 }

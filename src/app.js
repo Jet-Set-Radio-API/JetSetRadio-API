@@ -1,11 +1,10 @@
-import express from 'express';
-import axios from 'axios';
-import dotenv from 'dotenv';
+import express from "express";
+import axios from "axios";
+import dotenv from "dotenv";
 dotenv.config();
 
-import LOGGER from './utils/logger.js';
-import MiddlewareManager from './managers/MiddlewareManager.js';
-
+import LOGGER from "./utils/logger.js";
+import MiddlewareManager from "./managers/MiddlewareManager.js";
 
 const middlewareManager = new MiddlewareManager();
 
@@ -18,9 +17,9 @@ middlewareManager.setMiddleware(app);
 app.listen(PORT || 8080, () => {
   LOGGER.info(`JSR-API Listening on port ${PORT}`);
 
-// Ping App every 10 minutes
+  // Ping App every 10 minutes
   setInterval(async () => {
     const res = await axios.get(`${baseUrl}/health`);
     console.log(`App Ping - ${baseUrl}. Status: ${res.data.message}`);
   }, 600000);
-})
+});
