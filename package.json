@@ -1,6 +1,6 @@
 {
   "name": "jetsetradio-api",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A Data Provider relating to the JSR/JSRF universe",
   "type": "module",
   "main": "src/app.js",
