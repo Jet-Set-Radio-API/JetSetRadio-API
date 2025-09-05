@@ -25,7 +25,14 @@ Src
  - `Utils`: A list of helper functions and services such as winston logging and swagger doc configs
 
 Test
+ - `Data`: Contains test data used for application unit tests
  - `Helper`: Contains a list of fuctions to use the `mongodb-memory-server` in integration tests.
  - Every other file contains unit and integration tests relating to a specific resource.
 
 Before submitting your changes, make sure to run `npm run test` to verify all tests pass successfully.
+
+How to run tests:
+ - To run ALL Tests: `npm run test`
+ - To test individual files
+     - `npm run test:file -- test/locations.test.js`
+

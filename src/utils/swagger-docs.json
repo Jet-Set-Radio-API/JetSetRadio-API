@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "JetSetRadio-API",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "Providing data for all things JSR and JSRF!"
   },
   "host": "localhost:9005",
@@ -37,11 +37,16 @@
       "description": "Artist Data from JSR and JSRF"
     }
   ],
-  "schemes": ["https", "http"],
+  "schemes": [
+    "https",
+    "http"
+  ],
   "paths": {
     "/games/": {
       "get": {
-        "tags": ["Games"],
+        "tags": [
+          "Games"
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -55,7 +60,9 @@
     },
     "/games/{id}": {
       "get": {
-        "tags": ["Games"],
+        "tags": [
+          "Games"
+        ],
         "description": "",
         "parameters": [
           {
@@ -74,7 +81,25 @@
     },
     "/songs/": {
       "get": {
-        "tags": ["Songs"],
+        "tags": [
+          "Songs"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/songs/random": {
+      "get": {
+        "tags": [
+          "Songs"
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -88,7 +113,9 @@
     },
     "/songs/jsr": {
       "get": {
-        "tags": ["Songs"],
+        "tags": [
+          "Songs"
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -105,7 +132,9 @@
     },
     "/songs/jsr/{id}": {
       "get": {
-        "tags": ["Songs"],
+        "tags": [
+          "Songs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -130,7 +159,9 @@
     },
     "/songs/jsrf": {
       "get": {
-        "tags": ["Songs"],
+        "tags": [
+          "Songs"
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -147,7 +178,9 @@
     },
     "/songs/jsrf/{id}": {
       "get": {
-        "tags": ["Songs"],
+        "tags": [
+          "Songs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -172,7 +205,9 @@
     },
     "/songs/brc": {
       "get": {
-        "tags": ["Songs"],
+        "tags": [
+          "Songs"
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -189,7 +224,9 @@
     },
     "/songs/brc/{id}": {
       "get": {
-        "tags": ["Songs"],
+        "tags": [
+          "Songs"
+        ],
         "description": "",
         "parameters": [
           {
@@ -214,7 +251,9 @@
     },
     "/artists/": {
       "get": {
-        "tags": ["Artists"],
+        "tags": [
+          "Artists"
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -231,7 +270,9 @@
     },
     "/artists/{id}": {
       "get": {
-        "tags": ["Artists"],
+        "tags": [
+          "Artists"
+        ],
         "description": "",
         "parameters": [
           {
@@ -256,7 +297,9 @@
     },
     "/artists/{id}/songs": {
       "get": {
-        "tags": ["Artists"],
+        "tags": [
+          "Artists"
+        ],
         "description": "",
         "parameters": [
           {
@@ -281,29 +324,41 @@
     },
     "/graffiti-tags/": {
       "get": {
-        "tags": ["GraffitiTags"],
+        "tags": [
+          "GraffitiTags"
+        ],
         "description": "",
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/graffiti-tags/jsr": {
       "get": {
-        "tags": ["GraffitiTags"],
+        "tags": [
+          "GraffitiTags"
+        ],
         "description": "",
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/graffiti-tags/jsr/{id}": {
       "get": {
-        "tags": ["GraffitiTags"],
+        "tags": [
+          "GraffitiTags"
+        ],
         "description": "",
         "parameters": [
           {
@@ -316,24 +371,34 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/graffiti-tags/jsrf": {
       "get": {
-        "tags": ["GraffitiTags"],
+        "tags": [
+          "GraffitiTags"
+        ],
         "description": "",
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/graffiti-tags/jsrf/{id}": {
       "get": {
-        "tags": ["GraffitiTags"],
+        "tags": [
+          "GraffitiTags"
+        ],
         "description": "",
         "parameters": [
           {
@@ -346,24 +411,34 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/characters/": {
       "get": {
-        "tags": ["Characters"],
+        "tags": [
+          "Characters"
+        ],
         "description": "",
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/characters/random": {
       "get": {
-        "tags": ["Characters"],
+        "tags": [
+          "Characters"
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -377,18 +452,25 @@
     },
     "/characters/jsr": {
       "get": {
-        "tags": ["Characters"],
+        "tags": [
+          "Characters"
+        ],
         "description": "",
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/characters/jsr/{id}": {
       "get": {
-        "tags": ["Characters"],
+        "tags": [
+          "Characters"
+        ],
         "description": "",
         "parameters": [
           {
@@ -401,24 +483,37 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/characters/jsrf": {
       "get": {
-        "tags": ["Characters"],
+        "tags": [
+          "Characters"
+        ],
         "description": "",
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/characters/jsrf/{id}": {
       "get": {
-        "tags": ["Characters"],
+        "tags": [
+          "Characters"
+        ],
         "description": "",
         "parameters": [
           {
@@ -431,24 +526,37 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/characters/brc": {
       "get": {
-        "tags": ["Characters"],
+        "tags": [
+          "Characters"
+        ],
         "description": "",
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/characters/brc/{id}": {
       "get": {
-        "tags": ["Characters"],
+        "tags": [
+          "Characters"
+        ],
         "description": "",
         "parameters": [
           {
@@ -461,35 +569,69 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/locations/": {
       "get": {
-        "tags": ["Locations"],
+        "tags": [
+          "Locations"
+        ],
         "description": "",
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/locations/random": {
+      "get": {
+        "tags": [
+          "Locations"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/locations/jsr": {
       "get": {
-        "tags": ["Locations"],
+        "tags": [
+          "Locations"
+        ],
         "description": "",
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/locations/jsr/{id}": {
       "get": {
-        "tags": ["Locations"],
+        "tags": [
+          "Locations"
+        ],
         "description": "",
         "parameters": [
           {
@@ -502,24 +644,34 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/locations/jsrf": {
       "get": {
-        "tags": ["Locations"],
+        "tags": [
+          "Locations"
+        ],
         "description": "",
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/locations/jsrf/{id}": {
       "get": {
-        "tags": ["Locations"],
+        "tags": [
+          "Locations"
+        ],
         "description": "",
         "parameters": [
           {
@@ -532,24 +684,34 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/locations/brc": {
       "get": {
-        "tags": ["Locations"],
+        "tags": [
+          "Locations"
+        ],
         "description": "",
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/locations/brc/{id}": {
       "get": {
-        "tags": ["Locations"],
+        "tags": [
+          "Locations"
+        ],
         "description": "",
         "parameters": [
           {
@@ -562,24 +724,34 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/levels/": {
       "get": {
-        "tags": ["Levels"],
+        "tags": [
+          "Levels"
+        ],
         "description": "",
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/levels/{id}": {
       "get": {
-        "tags": ["Levels"],
+        "tags": [
+          "Levels"
+        ],
         "description": "",
         "parameters": [
           {
@@ -592,24 +764,50 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/collectibles/": {
       "get": {
-        "tags": ["Collectibles"],
+        "tags": [
+          "Collectibles"
+        ],
         "description": "",
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/collectibles/random": {
+      "get": {
+        "tags": [
+          "Collectibles"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/collectibles/{id}": {
       "get": {
-        "tags": ["Collectibles"],
+        "tags": [
+          "Collectibles"
+        ],
         "description": "",
         "parameters": [
           {
@@ -622,6 +820,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }

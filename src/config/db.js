@@ -6,7 +6,7 @@ dotenv.config();
 import LOGGER from "../utils/logger.js";
 import Constants from "../constants/dbConstants.js";
 
-const {CORE_DB, JSR_DB, JSRF_DB, BRC_DB} = Constants;
+const {CORE_DB} = Constants;
 
 const buildMongoUri = () => {
   const user = process.env.MONGO_USER;
@@ -33,7 +33,7 @@ const buildMongoUri = () => {
 const client = new MongoClient(buildMongoUri());
 
 /* Database Connections */
-export const performCoreAdminAction = async (action, username) => {
+export const performAdminAction = async (action, username) => {
   try {
     await client.connect();
     return await action(client, CORE_DB, "Admin", username);
@@ -45,73 +45,13 @@ export const performCoreAdminAction = async (action, username) => {
   }
 };
 
-export const performCoreAction = async (action, collection, id, qps) => {
+export const performDBAction = async (action, dbName, collection, id, qps) => {
   try {
     await client.connect();
     const queryActions = [getSortQuery(qps), getLimitSize(qps)];
     return await action(
       client,
-      CORE_DB,
-      collection,
-      id,
-      getQueryObject(qps),
-      queryActions
-    );
-  } catch (err) {
-    console.error(err);
-    return err;
-  } finally {
-    await client.close();
-  }
-};
-
-export const performJSRAction = async (action, collection, id, qps) => {
-  try {
-    await client.connect();
-    const queryActions = [getSortQuery(qps), getLimitSize(qps)];
-    return await action(
-      client,
-      JSR_DB,
-      collection,
-      id,
-      getQueryObject(qps),
-      queryActions
-    );
-  } catch (err) {
-    console.error(err);
-    return err;
-  } finally {
-    await client.close();
-  }
-};
-
-export const performJSRFAction = async (action, collection, id, qps) => {
-  try {
-    await client.connect();
-    const queryActions = [getSortQuery(qps), getLimitSize(qps)];
-    return await action(
-      client,
-      JSRF_DB,
-      collection,
-      id,
-      getQueryObject(qps),
-      queryActions
-    );
-  } catch (err) {
-    console.error(err);
-    return err;
-  } finally {
-    await client.close();
-  }
-};
-
-export const performBRCAction = async (action, collection, id, qps) => {
-  try {
-    await client.connect();
-    const queryActions = [getSortQuery(qps), getLimitSize(qps)];
-    return await action(
-      client,
-      BRC_DB,
+      dbName,
       collection,
       id,
       getQueryObject(qps),

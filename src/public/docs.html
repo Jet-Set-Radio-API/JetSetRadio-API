@@ -114,6 +114,10 @@
         <p>Endpoints:</p>
         <ul>
           <li><code class="code-snippet">/characters</code> ==> Returns all Characters</li>
+          <li><code class="code-snippet">/characters/random</code> ==> Returns a Random Character From any Game</li>
+          <li><code class="code-snippet">/characters/random?game=jsr</code> ==> Returns a Random JSR Character</li>
+          <li><code class="code-snippet">/characters/random?game=jsrf</code> ==> Returns a Random JSRF Character</li>
+          <li><code class="code-snippet">/characters/random?game=brc</code> ==> Returns a Random BRC Character</li>
           <li><code class="code-snippet">/characters/jsr</code> ==> Returns all Jet Set Radio Characters</li>
           <li><code class="code-snippet">/characters/jsr/:id</code> ==> Returns a single JSR Character by ID</li>
           <li><code class="code-snippet">/characters/jsrf</code> ==> Returns all Jet Set Radio Future Characters</li>
@@ -133,6 +137,10 @@
         <p>Endpoints:</p>
         <ul>
           <li><code class="code-snippet">/locations</code> ==> Returns all Locations</li>
+          <li><code class="code-snippet">/locations/random</code> ==> Returns a Random Location From any Game</li>
+          <li><code class="code-snippet">/locations/random?game=jsr</code> ==> Returns a Random JSR Location</li>
+          <li><code class="code-snippet">/locations/random?game=jsrf</code> ==> Returns a Random JSRF Location</li>
+          <li><code class="code-snippet">/locations/random?game=brc</code> ==> Returns a Random BRC Location</li>
           <li><code class="code-snippet">/locations/jsr</code> ==> Returns all Jet Set Radio Locations</li>
           <li><code class="code-snippet">/locations/jsr/:id</code> ==> Returns a single JSR Location by ID</li>
           <li><code class="code-snippet">/locations/jsrf</code> ==> Returns all Jet Set Radio Future Locations</li>
@@ -170,6 +178,8 @@
           <li><code class="code-snippet">/graffiti-tags/jsr/:id</code> ==> Returns a single JSR Graffiti-Tag by ID</li>
           <li><code class="code-snippet">/graffiti-tags/jsrf</code> ==> Returns all Jet Set Radio Future Graffiti-Tags</li>
           <li><code class="code-snippet">/graffiti-tags/jsrf/:id</code> ==> Returns a single JSRF Graffiti-Tag by ID</li>
+          <li><code class="code-snippet">/graffiti-tags/jsr?size=XL</code> ==> Returns all JSR XL Graffiti-Tags</li>
+          <li><code class="code-snippet">/graffiti-tags?tagName=POISON JAM</code> ==> Returns Graffiti-Tags with tagName</li>
         </ul>
         <p>Example Request:</p>
         <code class="code-snippet">https://jetsetradio-api.onrender.com/v1/api/graffiti-tags?sortBy=size&orderBy=desc</code>
@@ -183,6 +193,10 @@
         <p>Endpoints:</p>
         <ul>
           <li><code class="code-snippet">/songs</code> ==> Returns all Songs</li>
+          <li><code class="code-snippet">/songs/random</code> ==> Returns a Random Song From any Game</li>
+          <li><code class="code-snippet">/songs/random?game=jsr</code> ==> Returns a Random JSR Song</li>
+          <li><code class="code-snippet">/songs/random?game=jsrf</code> ==> Returns a Random JSRF Song</li>
+          <li><code class="code-snippet">/songs/random?game=brc</code> ==> Returns a Random BRC Song</li>
           <li><code class="code-snippet">/songs/jsr</code> ==> Returns all Jet Set Radio Songs</li>
           <li><code class="code-snippet">/songs/jsr/:id</code> ==> Returns a single JSR Song by ID</li>
           <li><code class="code-snippet">/songs/jsrf</code> ==> Returns all Jet Set Radio Future Songs</li>
@@ -203,7 +217,7 @@
         <ul>
           <li><code class="code-snippet">/artists</code> ==> Returns all Artists</li>
           <li><code class="code-snippet">/artists/:id</code> ==> Returns a single Artist by ID</li>
-          <li><code class="code-snippet">/artists/:id/songs</code> ==> Returns all Songs by Artist</li>
+          <li><code class="code-snippet">/artists/:id/songs</code> ==> Returns all Songs by A Single Artist</li>
         </ul>
         <p>Example Request:</p>
         <code class="code-snippet">https://jetsetradio-api.onrender.com/v1/api/artists/643865b5af5362b86b844d75</code>
@@ -217,7 +231,10 @@
         <p>Endpoints:</p>
         <ul>
           <li><code class="code-snippet">/collectibles</code> ==> Returns all Collectibles</li>
+          <li><code class="code-snippet">/collectibles/random</code> ==> Returns a Random Collectible</li>
           <li><code class="code-snippet">/collectibles/:id</code> ==> Returns a single Collectible by ID</li>
+          <li><code class="code-snippet">/collectibles?type=CD</code> ==> Returns all CD Collectibles</li>
+          <li><code class="code-snippet">/collectibles?character.name=Shine</code> ==> Returns Shine's Collectibles</li>
         </ul>
         <p>Example Request:</p>
         <code class="code-snippet">https://jetsetradio-api.onrender.com/v1/api/collectibles?sortBy=name&limit=5</code>

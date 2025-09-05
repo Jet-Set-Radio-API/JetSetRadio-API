@@ -1,50 +1,71 @@
-import {performBRCAction} from "../config/db.js";
+import Constants from "../constants/dbConstants.js";
 import {Actions} from "../config/dbActions.js";
-import LOGGER from "../utils/logger.js";
+import {performDBAction} from "../config/db.js";
 import {sortObjects} from "../utils/utility.js";
+import LOGGER from "../utils/logger.js";
 
 const Collectible = "Collectible";
+const {BRC_DB} = Constants;
 
-export const getAllCollectibles = async (req, res) => {
+export const getCollectibles = async (req, res) => {
   try {
     const sortByValue = req?.query?.sortBy ? req?.query?.sortBy : undefined;
     const sortOrder = req?.query?.orderBy ? req?.query?.orderBy : "asc";
-    const brcCollectibles = await fetchBRCCollectibles(req);
+    const allCollectibles = await fetchCollectibles(req);
     if (sortByValue) {
-      const collectibles = [...brcCollectibles];
+      const collectibles = [...allCollectibles];
       return res.send(collectibles.sort(sortObjects(sortByValue, sortOrder)));
     }
-    res.send([...brcCollectibles]);
+    res.send([...allCollectibles]);
   } catch (err) {
-    LOGGER.error(`Could not fetch ALL Collectibles \n${err}`);
+    LOGGER.error(`Could not fetch ALL Collectibles`, err);
+    res
+      .status(500)
+      .json({message: "Failed to fetch ALL Collectibles", err: err});
   }
 };
 
-export const getBRCCollectibles = async (req, res) => {
+export const getRandomCollectible = async (req, res) => {
   try {
-    res.send(await fetchBRCTags(req));
+    const randomCollectible = await fetchRandomCollectible(req, BRC_DB);
+    res.json(randomCollectible[0]);
   } catch (err) {
-    LOGGER.error(`Could not fetch BRC Collectible \n${err}`);
+    LOGGER.error(`Could not fetch random collectible`, err);
+    res.status(500).json({error: "Failed to fetch random collectible"});
   }
 };
 
-export const getBRCCollectibleById = async (req, res) => {
+export const getCollectibleById = async (req, res) => {
   try {
-    const tagId = req?.params?.id;
-    res.send(await performBRCAction(Actions.fetchById, Collectible, tagId));
+    const id = req?.params?.id;
+    res.send(await performDBAction(Actions.fetchById, BRC_DB, Collectible, id));
   } catch (err) {
-    LOGGER.error(`Could not fetch BRC Collectible With ID: ${tagId} \n${err}`);
+    LOGGER.error(`Could not fetch Collectible With ID: ${tagId}`, err);
+    res
+      .status(500)
+      .json({message: `Failed to fetch Collectible by Id ${id}`, err: err});
   }
 };
 
-export const fetchBRCCollectibles = async (req) => {
+export const fetchCollectibles = async (req) => {
   if (req?.query) {
-    return await performBRCAction(
+    return await performDBAction(
       Actions.fetchWithQuery,
+      BRC_DB,
       Collectible,
       null,
       req?.query
     );
   }
-  return await performBRCAction(Actions.fetchAll, Collectible, null);
+  return await performDBAction(Actions.fetchAll, BRC_DB, Collectible, null);
+};
+
+export const fetchRandomCollectible = async (req, dbName) => {
+  return await performDBAction(
+    Actions.fetchRandom,
+    dbName,
+    Collectible,
+    null,
+    req?.query
+  );
 };

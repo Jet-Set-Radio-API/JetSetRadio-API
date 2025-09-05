@@ -1,14 +1,15 @@
 {
   "name": "jetsetradio-api",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A Data Provider relating to the JSR/JSRF universe",
   "type": "module",
   "main": "src/app.js",
   "scripts": {
-    "test": "export $(cat ./qa.env | egrep -v '#|^$' | xargs) && node --no-warnings --experimental-vm-modules ./node_modules/jest/bin/jest.js",
     "build": "npm install",
     "prod": "export $(cat ./prod.env | egrep -v '#|^$' | xargs) && node src/utils/swagger.js",
-    "qa": "export $(cat ./qa.env | egrep -v '#|^$' | xargs) && nodemon --inspect --ignore src/utils/ src/utils/swagger.js"
+    "qa": "export $(cat ./qa.env | egrep -v '#|^$' | xargs) && nodemon --inspect --ignore src/utils/ src/utils/swagger.js",
+    "test": "export $(cat ./qa.env | egrep -v '#|^$' | xargs) && node --no-warnings --experimental-vm-modules ./node_modules/jest/bin/jest.js",
+    "test:file": "export $(cat ./qa.env | egrep -v '#|^$' | xargs) && node --no-warnings --experimental-vm-modules ./node_modules/jest/bin/jest.js"
   },
   "keywords": [],
   "author": "RazzNBlue",

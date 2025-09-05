@@ -1,7 +1,6 @@
-import { createLogger, transports, format } from 'winston';
-import dotenv from 'dotenv';
+import {createLogger, transports, format} from "winston";
+import dotenv from "dotenv";
 dotenv.config();
-
 
 const colors = {
   debug: "magenta",
@@ -17,13 +16,13 @@ const LOGGER = createLogger({
       format: format.combine(
         format.colorize({
           all: true,
-          colors: colors
+          colors: colors,
         }),
-        format.timestamp(), 
+        format.timestamp(),
         format.simple()
       ),
-    })
-  ]
-})
+    }),
+  ],
+});
 
 export default LOGGER;

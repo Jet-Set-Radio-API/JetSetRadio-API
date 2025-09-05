@@ -21,7 +21,7 @@ import {renderHome, renderDocs} from "../controllers/indexController.js";
 import {listCollections} from "../config/db.js";
 import LOGGER from "../utils/logger.js";
 import {Actions} from "../config/dbActions.js";
-import {performCoreAdminAction} from "../config/db.js";
+import {performAdminAction} from "../config/db.js";
 
 const cache = new MemoryCache.Cache();
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -97,7 +97,6 @@ const filterPipeRoutes = async (req, endpoints) => {
     const filteredEndpoints = [];
     for (const endpoint of endpoints) {
       const model = endpoint.split("/")[3].replace("-", "");
-      console.log("processing model: ", model, " and endpoint: ", endpoint);
       if (coreCollections.includes(model)) {
         filteredEndpoints.push(endpoint);
       }
@@ -167,7 +166,7 @@ const cacheMiddleware = (req, res, next) => {
 const clearCache = async (req, res) => {
   const username = req?.body?.username;
   const password = req?.body?.password;
-  const adminUser = await performCoreAdminAction(Actions.fetchAdmin, username);
+  const adminUser = await performAdminAction(Actions.fetchAdmin, username);
   if (!adminUser) {
     LOGGER.error("Admin User Not Found");
     return res.status(400).send();

@@ -13,9 +13,10 @@ This page will guide you on setting up a development environment for this projec
     ```sh
     git clone git@github.com:Jet-Set-Radio-API/JetSetRadio-API.git
     ```
+
 2. Install Dependencies
     ```sh
-    npm install
+    nvm use && npm install
     ```
 3. [Create](https://account.mongodb.com/account/login) a local MongoDB Database or in Atlas 
 
@@ -42,15 +43,16 @@ This page will guide you on setting up a development environment for this projec
     # MONGO DATABASES (names do not matter)
     JSR_DB=
     JSRF_DB=
+    BRC_DB
     CORE_DB=
     ```
-    The databases section in the env file are names of the databases. For development purposes it does not matter what these names are just as long as you can distinguish one from the other and you know which one is Core, JSR, or JSRF. 
+    The databases section in the env file are names of the databases. For development purposes it does not matter what these names are just as long as you can distinguish one from the other and you know which one is which.
 
 6. Run the project 
     ```sh
     npm run qa
     ```
-7. (Optional) - To populate your local database with production data, hit the /pipe route in your browser or using Postman. The logs should indicate if the piping was successful.
+7. (Optional) - To populate your local database with production data, hit the /pipe route in your browser or using Postman. The logs will indicate if the piping was successful.
     ```sh
     http://localhost:3005/pipe
     ```
