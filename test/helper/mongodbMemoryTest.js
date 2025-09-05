@@ -7,7 +7,6 @@ let client;
 export const connect = async () => {
   mongoDB = await MongoMemoryServer.create();
   const uri = mongoDB.getUri();
-  console.log("uri", uri);
   client = new MongoClient(uri);
   await client.connect();
 };
