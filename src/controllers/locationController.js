@@ -1,80 +1,103 @@
-import {
-  performJSRAction,
-  performJSRFAction,
-  performBRCAction,
-} from "../config/db.js";
+import Constants from "../constants/dbConstants.js";
 import {Actions} from "../config/dbActions.js";
-import LOGGER from "../utils/logger.js";
+import {performDBAction} from "../config/db.js";
 import {sortObjects} from "../utils/utility.js";
+import LOGGER from "../utils/logger.js";
 
 const Location = "Location";
 const Level = "Level";
+const {JSR_DB, JSRF_DB, BRC_DB, gameMap} = Constants;
 
 export const getLocations = async (req, res) => {
   try {
     const sortByValue = req?.query?.sortBy ? req?.query?.sortBy : undefined;
     const sortOrder = req?.query?.orderBy ? req?.query?.orderBy : "asc";
-    const jsrLocations = await fetchJSRLocations(req);
-    const jsrfLocations = await fetchJSRFLocations(req);
-    const brcLocations = await fetchBRCLocations(req);
+    const locations = await fetchLocations(req, "ALL");
     if (sortByValue) {
-      const locations = [...jsrLocations, ...jsrfLocations, ...brcLocations];
       return res.send(locations.sort(sortObjects(sortByValue, sortOrder)));
     }
-    res.send([...jsrLocations, ...jsrfLocations, ...brcLocations]);
+    res.send(locations);
   } catch (err) {
-    LOGGER.error(`Could not fetch ALL Locations \n${err}`);
+    LOGGER.error(`Could not fetch ALL Locations`, err);
+    res.status(500).json({message: "Failed to fetch ALL locations", err: err});
+  }
+};
+
+export const getRandomLocation = async (req, res) => {
+  try {
+    const games = [JSR_DB, JSRF_DB, BRC_DB];
+    const userSelectedGame = req?.query?.game;
+    let game =
+      gameMap[userSelectedGame] ||
+      games[Math.floor(Math.random() * games.length)];
+    const randomLocation = await fetchRandomLocation(req, game);
+    res.json(randomLocation[0]);
+  } catch (err) {
+    LOGGER.error(`Could not fetch random location`, err);
+    res.status(500).json({error: "Failed to fetch random location"});
   }
 };
 
 export const getJSRLocations = async (req, res) => {
   try {
-    res.send(await fetchJSRLocations(req));
+    res.send(await fetchLocations(req, JSR_DB));
   } catch (err) {
-    LOGGER.error(`Could not fetch JSR Locations \n${err}`);
+    LOGGER.error(`Could not fetch JSR Locations`, err);
+    res.status(500).json({message: "Failed to fetch JSR locations", err: err});
   }
 };
 
 export const getJSRLocationById = async (req, res) => {
   try {
     const id = req?.params?.id;
-    res.send(await performJSRAction(Actions.fetchById, Location, id));
+    res.send(await performDBAction(Actions.fetchById, JSR_DB, Location, id));
   } catch (err) {
-    LOGGER.error(`Could not fetch JSR Location With ID: ${id} \n${err}`);
+    LOGGER.error(`Could not fetch JSR Location With ID: ${id}`, err);
+    res
+      .status(500)
+      .json({message: `Failed to fetch JSR location By ID ${id}`, err: err});
   }
 };
 
 export const getJSRFLocations = async (req, res) => {
   try {
-    res.send(await fetchJSRFLocations(req));
+    res.send(await fetchLocations(req, JSRF_DB));
   } catch (err) {
-    LOGGER.error(`Could not fetch JSRF Locations \n${err}`);
+    LOGGER.error(`Could not fetch JSRF Locations`, err);
+    res.status(500).json({message: "Failed to fetch JSRF locations", err: err});
   }
 };
 
 export const getJSRFLocationById = async (req, res) => {
   try {
     const id = req?.params?.id;
-    res.send(await performJSRFAction(Actions.fetchById, Location, id));
+    res.send(await performDBAction(Actions.fetchById, JSRF_DB, Location, id));
   } catch (err) {
-    LOGGER.error(`Could not fetch JSRF Location With ID: ${id} \n${err}`);
+    LOGGER.error(`Could not fetch JSRF Location With ID: ${id}`, err);
+    res
+      .status(500)
+      .json({message: `Failed to fetch JSRF location By ID ${id}`, err: err});
   }
 };
 
 export const getBRCLocations = async (req, res) => {
   try {
-    res.send(await fetchBRCLocations(req));
+    res.send(await fetchLocations(req, BRC_DB));
   } catch (err) {
-    LOGGER.error(`Could not fetch BRC Locations \n${err}`);
+    LOGGER.error(`Could not fetch BRC Locations`, err);
+    res.status(500).json({message: "Failed to fetch BRC locations", err: err});
   }
 };
 
 export const getBRCLocationById = async (req, res) => {
   try {
     const id = req?.params?.id;
-    res.send(await performBRCAction(Actions.fetchById, Location, id));
+    res.send(await performDBAction(Actions.fetchById, BRC_DB, Location, id));
   } catch (err) {
-    LOGGER.error(`Could not fetch BRC Location With ID: ${id} \n${err}`);
+    LOGGER.error(`Could not fetch BRC Location With ID: ${id}`, err);
+    res
+      .status(500)
+      .json({message: `Failed to fetch BRC location By ID ${id}`, err: err});
   }
 };
 
@@ -82,63 +105,60 @@ export const getLevels = async (req, res) => {
   try {
     res.send(await fetchJSRLevels(req));
   } catch (err) {
-    LOGGER.error(`Could not fetch JSR Levels \n${err}`);
+    LOGGER.error(`Could not fetch JSR Levels`, err);
+    res.status(500).json({message: "Failed to fetch JSR levels", err: err});
   }
 };
 
 export const getLevelById = async (req, res) => {
   try {
     const id = req?.params?.id;
-    res.send(await performJSRAction(Actions.fetchById, Level, id));
+    res.send(await performDBAction(Actions.fetchById, JSR_DB, Level, id));
   } catch (err) {
-    LOGGER.error(`Could not fetch JSR Level with ID ${id} \n${err}`);
+    LOGGER.error(`Could not fetch JSR Level with ID ${id}`, err);
+    res
+      .status(500)
+      .json({message: `Failed to fetch JSR level By ID ${id}`, err: err});
   }
 };
 
 export const fetchJSRLevels = async (req) => {
   if (req?.query) {
-    return await performJSRAction(
+    return await performDBAction(
       Actions.fetchWithQuery,
+      JSR_DB,
       Level,
       null,
       req?.query
     );
   }
-  return await performJSRAction(Actions.fetchAll, Level, null);
+  return await performDBAction(Actions.fetchAll, JSR_DB, Level, null);
 };
 
-export const fetchJSRLocations = async (req) => {
-  if (req?.query) {
-    return await performJSRAction(
-      Actions.fetchWithQuery,
-      Location,
-      null,
-      req?.query
-    );
+export const fetchLocations = async (req, dbName) => {
+  if (dbName === "ALL") {
+    const jsrLocations = await fetchLocations(req, JSR_DB);
+    const jsrfLocations = await fetchLocations(req, JSRF_DB);
+    const brcLocations = await fetchLocations(req, BRC_DB);
+    const allLocations = [...jsrLocations, ...jsrfLocations, ...brcLocations];
+    return allLocations;
   }
-  return await performJSRAction(Actions.fetchAll, Location, null);
+
+  return await performDBAction(
+    Actions.fetchWithQuery,
+    dbName,
+    Location,
+    null,
+    req?.query
+  );
 };
 
-export const fetchJSRFLocations = async (req) => {
-  if (req?.query) {
-    return await performJSRFAction(
-      Actions.fetchWithQuery,
-      Location,
-      null,
-      req?.query
-    );
-  }
-  return await performJSRFAction(Actions.fetchAll, Location, null);
-};
-
-export const fetchBRCLocations = async (req) => {
-  if (req?.query) {
-    return await performBRCAction(
-      Actions.fetchWithQuery,
-      Location,
-      null,
-      req?.query
-    );
-  }
-  return await performBRCAction(Actions.fetchAll, Location, null);
+export const fetchRandomLocation = async (req, dbName) => {
+  return await performDBAction(
+    Actions.fetchRandom,
+    dbName,
+    Location,
+    null,
+    req?.query
+  );
 };

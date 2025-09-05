@@ -1,15 +1,14 @@
-import { fileURLToPath } from 'url';
-import path, { dirname } from 'path';
-import dotenv from 'dotenv';
+import {fileURLToPath} from "url";
+import path, {dirname} from "path";
+import dotenv from "dotenv";
 dotenv.config();
-
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export const renderHome = (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
-}
+  res.sendFile(path.join(__dirname, "..", "public", "index.html"));
+};
 
 export const renderDocs = (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'public', 'docs.html'))
-}
+  res.sendFile(path.join(__dirname, "..", "public", "docs.html"));
+};

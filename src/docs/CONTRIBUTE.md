@@ -29,3 +29,9 @@ Test
  - Every other file contains unit and integration tests relating to a specific resource.
 
 Before submitting your changes, make sure to run `npm run test` to verify all tests pass successfully.
+
+How to run tests:
+ - To run ALL Tests: `npm run test`
+ - To test individual files
+     - `npm run test:file -- test/locations.test.js`
+
