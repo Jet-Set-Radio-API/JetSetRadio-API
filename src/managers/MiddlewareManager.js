@@ -101,7 +101,7 @@ const filterPipeRoutes = async (req, endpoints) => {
       if (coreCollections.includes(model)) {
         filteredEndpoints.push(endpoint);
       }
-      if (jsrCollections.includes(model) && endpoint.includes("jsr")) {
+      if (jsrCollections.includes(model) && endpoint.includes("jsr") || endpoint.includes("collectibles")) {
         filteredEndpoints.push(endpoint);
       }
       if (jsrfCollections.includes(model) && endpoint.includes("jsrf")) {
