@@ -2,11 +2,12 @@ import Constants from "../constants/dbConstants.js";
 import {Actions} from "../config/dbActions.js";
 import {performDBAction} from "../config/db.js";
 import {sortObjects} from "../utils/utility.js";
+import {fetchRandom} from "./utilController.js";
 import LOGGER from "../utils/logger.js";
 
 const Location = "Location";
 const Level = "Level";
-const {JSR_DB, JSRF_DB, BRC_DB, gameMap} = Constants;
+const {JSR_DB, JSRF_DB, BRC_DB} = Constants;
 
 export const getLocations = async (req, res) => {
   try {
@@ -25,13 +26,7 @@ export const getLocations = async (req, res) => {
 
 export const getRandomLocation = async (req, res) => {
   try {
-    const games = [JSR_DB, JSRF_DB, BRC_DB];
-    const userSelectedGame = req?.query?.game;
-    let game =
-      gameMap[userSelectedGame] ||
-      games[Math.floor(Math.random() * games.length)];
-    const randomLocation = await fetchRandomLocation(req, game);
-    res.json(randomLocation[0]);
+    res.send(await fetchRandom(req, Location));
   } catch (err) {
     LOGGER.error(`Could not fetch random location`, err);
     res.status(500).json({error: "Failed to fetch random location"});
@@ -146,16 +141,6 @@ export const fetchLocations = async (req, dbName) => {
 
   return await performDBAction(
     Actions.fetchWithQuery,
-    dbName,
-    Location,
-    null,
-    req?.query
-  );
-};
-
-export const fetchRandomLocation = async (req, dbName) => {
-  return await performDBAction(
-    Actions.fetchRandom,
     dbName,
     Location,
     null,
