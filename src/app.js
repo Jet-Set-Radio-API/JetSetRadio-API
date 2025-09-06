@@ -16,7 +16,7 @@ const baseUrl = process.env.BASE_URL;
 middlewareManager.setMiddleware(app);
 
 (async () => {
-  await connectToDb(); // connect once
+  await connectToDb();
   app.listen(PORT || 8080, () => {
     LOGGER.info(`JSR-API Listening on port ${PORT}`);
 
