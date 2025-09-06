@@ -3,51 +3,43 @@ import {ObjectId} from "mongodb";
 import dotenv from "dotenv";
 dotenv.config();
 
-import LOGGER from "../utils/logger.js";
 import Constants from "../constants/dbConstants.js";
+import LOGGER from "../utils/logger.js";
 
 const {CORE_DB} = Constants;
 
-const buildMongoUri = () => {
-  const user = process.env.MONGO_USER;
-  const password = process.env.MONGO_PASS;
-  const clusterName = process.env.MONGO_CLUSTER;
-  const domainName = process.env.MONGO_DOMAIN;
-  if (!user) {
-    return LOGGER.error(`Invalid admin user found while building mongo uri`);
-  }
-  if (!password) {
-    return LOGGER.error(
-      `Invalid admin password found while building mongo uri`
-    );
-  }
-  if (!clusterName) {
-    return LOGGER.error(`Invalid cluster name found while building mongo uri`);
-  }
-  if (!domainName) {
-    return LOGGER.error(`Invalid domain name found while building mongo uri`);
-  }
-  return `mongodb+srv://${user}:${password}@${clusterName}.${domainName}?retryWrites=true&w=majority`;
-};
-
-const client = new MongoClient(buildMongoUri());
-
 /* Database Connections */
-export const performAdminAction = async (action, username) => {
+const client = new MongoClient(process.env.MONGO_URI);
+let isConnected = false;
+
+export const connectToDb = async () => {
+  if (isConnected) {
+    return client; // reuse existing connection
+  }
   try {
     await client.connect();
+    isConnected = true;
+    LOGGER.info("✅ Connected to MongoDB");
+    return client;
+  } catch (err) {
+    LOGGER.error("❌ Failed to connect to MongoDB", err);
+    throw err;
+  }
+};
+
+export const performAdminAction = async (action, username) => {
+  try {
+    await connectToDb();
     return await action(client, CORE_DB, "Admin", username);
   } catch (err) {
     console.error(err);
     return err;
-  } finally {
-    await client.close();
   }
 };
 
 export const performDBAction = async (action, dbName, collection, id, qps) => {
   try {
-    await client.connect();
+    await connectToDb();
     const queryActions = [getSortQuery(qps), getLimitSize(qps)];
     return await action(
       client,
@@ -60,20 +52,16 @@ export const performDBAction = async (action, dbName, collection, id, qps) => {
   } catch (err) {
     console.error(err);
     return err;
-  } finally {
-    await client.close();
   }
 };
 
 export const listCollections = async (dbName) => {
   try {
-    await client.connect();
+    await connectToDb();
     return await client.db(dbName).listCollections().toArray();
   } catch (err) {
     console.error(err);
     return err;
-  } finally {
-    await client.close();
   }
 };
 

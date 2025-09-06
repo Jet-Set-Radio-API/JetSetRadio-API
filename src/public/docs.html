@@ -23,49 +23,14 @@
       <div class="main-container">
         <h2>Introduction</h2>
         <p>Welcome to the jsrapi, the Jet Set Radio API! This documentation should help get you familiar with which resources are available and how to consume them with HTTP requests.</p>
-      </div>
-  
-      <div class="main-container">
-        <h2>Base URL</h2>
-        <p>The Base URL is the root URL for all of the API. If you ever get an error performing a request check the BaseURL first.</p>
-        <p>The Base URL is: </p>
-        <code class="code-snippet">https://jetsetradio-api.onrender.com/v1/api/</code>
-      </div>
-  
-      <div class="main-container">
-        <h2>Authentication</h2>
-        <p>Jsrapi is a completely open API. No authentication is required. This means you are only able to do GET requests. If you find a mistake in the data, then send an email to <b>jetsetradio.api@gmail.com</b> or post on issue on the <a class="inline-a" href="https://github.com/Jet-Set-Radio-API/JetSetRadio-API">github page</a>.</p>
-      </div>
-
-      <div class="main-container">
-        <h2>Rate Limiting</h2>
-        <p>A request limit has been set to avoid malicious abuse(if anyone were to do that!). Limiting is set per IP address. You can make a total of up to 1000 requests per hour.</p>
-      </div>
-  
-      <div class="main-container">
-        <h2>Sorting</h2>
-        <p>All API routes support the <code class="code-snippet">sortBy</code> and <code class="code-snippet">orderBy</code> parameters. If orderBy is omitted, it will assume an ascending direction.</p>
-        <p>Example:</p>
-        <code class="code-snippet">https://jetsetradio-api.onrender.com/v1/api/characters/jsr?sortBy=name&orderBy=desc</code>
-      </div>
-  
-      <div class="main-container">
-        <h2>Limiting</h2>
-        <p>All API routes support the <code class="code-snippet">limit</code> parameter. You can use this to return a limited number of results instead of the entire response.</p>
-        <p>Example:</p>
-        <code class="code-snippet">https://jetsetradio-api.onrender.com/v1/api/locations/jsrf?limit=5</code>
-      </div>
-
-      <div class="main-container">
-        <h2>Caching</h2>
-        <p>All API routes utilize cache in memory to be able to serve content faster! The cache is automatically set to expire after 1 hour. The expiration is subject to future change.</p>
+        <p>More info on rate limiting, caching, and other info can be found near the bottom of the page.</p>
       </div>
 
       <div class="main-container">
         <h2>Swagger Docs</h2>
-        <p>You can use the <a class="inline-a" href="/api-docs">swagger docs</a> to view the available endpoints, see their parameters, and test the routes out!</p>
-      </div>
-  
+        <p>You can also use the <a class="inline-a" href="/api-docs">swagger docs</a> to view the available endpoints, see their parameters, and test the routes out!</p>
+      </div> 
+
       ___________________________________________________________
       <div class="main-container">
         <h2>Resources</h2>
@@ -118,6 +83,7 @@
           <li><code class="code-snippet">/characters/random?game=jsr</code> ==> Returns a Random JSR Character</li>
           <li><code class="code-snippet">/characters/random?game=jsrf</code> ==> Returns a Random JSRF Character</li>
           <li><code class="code-snippet">/characters/random?game=brc</code> ==> Returns a Random BRC Character</li>
+          <li><code class="code-snippet">/characters/random?count=10</code> ==> Returns 10 random Characters</li>
           <li><code class="code-snippet">/characters/jsr</code> ==> Returns all Jet Set Radio Characters</li>
           <li><code class="code-snippet">/characters/jsr/:id</code> ==> Returns a single JSR Character by ID</li>
           <li><code class="code-snippet">/characters/jsrf</code> ==> Returns all Jet Set Radio Future Characters</li>
@@ -141,6 +107,7 @@
           <li><code class="code-snippet">/locations/random?game=jsr</code> ==> Returns a Random JSR Location</li>
           <li><code class="code-snippet">/locations/random?game=jsrf</code> ==> Returns a Random JSRF Location</li>
           <li><code class="code-snippet">/locations/random?game=brc</code> ==> Returns a Random BRC Location</li>
+          <li><code class="code-snippet">/locations/random?count=10</code> ==> Returns 10 random Locations</li>
           <li><code class="code-snippet">/locations/jsr</code> ==> Returns all Jet Set Radio Locations</li>
           <li><code class="code-snippet">/locations/jsr/:id</code> ==> Returns a single JSR Location by ID</li>
           <li><code class="code-snippet">/locations/jsrf</code> ==> Returns all Jet Set Radio Future Locations</li>
@@ -160,7 +127,7 @@
         <p>Endpoints:</p>
         <ul>
           <li><code class="code-snippet">/levels</code> ==> Returns all Levels</li>
-          <li><code class="code-snippet">/locations/:id</code> ==> Returns a single Level by ID</li>
+          <li><code class="code-snippet">/levels/:id</code> ==> Returns a single Level by ID</li>
         </ul>
         <p>Example Request:</p>
         <code class="code-snippet">https://jetsetradio-api.onrender.com/v1/api/levels?sortBy=chapter</code>
@@ -197,6 +164,7 @@
           <li><code class="code-snippet">/songs/random?game=jsr</code> ==> Returns a Random JSR Song</li>
           <li><code class="code-snippet">/songs/random?game=jsrf</code> ==> Returns a Random JSRF Song</li>
           <li><code class="code-snippet">/songs/random?game=brc</code> ==> Returns a Random BRC Song</li>
+          <li><code class="code-snippet">/songs/random?count=10&game=jsrf</code> ==> Returns 10 random JSRF Songs</li>
           <li><code class="code-snippet">/songs/jsr</code> ==> Returns all Jet Set Radio Songs</li>
           <li><code class="code-snippet">/songs/jsr/:id</code> ==> Returns a single JSR Song by ID</li>
           <li><code class="code-snippet">/songs/jsrf</code> ==> Returns all Jet Set Radio Future Songs</li>
@@ -232,6 +200,7 @@
         <ul>
           <li><code class="code-snippet">/collectibles</code> ==> Returns all Collectibles</li>
           <li><code class="code-snippet">/collectibles/random</code> ==> Returns a Random Collectible</li>
+          <li><code class="code-snippet">/collectibles/random?count=10</code> ==> Returns 10 random Collectibles</li>
           <li><code class="code-snippet">/collectibles/:id</code> ==> Returns a single Collectible by ID</li>
           <li><code class="code-snippet">/collectibles?type=CD</code> ==> Returns all CD Collectibles</li>
           <li><code class="code-snippet">/collectibles?character.name=Shine</code> ==> Returns Shine's Collectibles</li>
@@ -241,6 +210,42 @@
         <p>Example Response: <button class="expandable-button">Expand</button> </p>
         <pre id="collectible-response" class="expandable code-snippet" style="display: none;"></pre>
       </div>
+  
+      <div class="main-container">
+        <h2>Base URL</h2>
+        <p>The Base URL is the root URL for all of the API. If you ever get an error performing a request check the BaseURL first.</p>
+        <p>The Base URL is: </p>
+        <code class="code-snippet">https://jetsetradio-api.onrender.com/v1/api/</code>
+      </div>
+  
+      <div class="main-container">
+        <h2>Authentication</h2>
+        <p>Jsrapi is a completely open API. No authentication is required. This means you are only able to do GET requests. If you find a mistake in the data, then send an email to <b>jetsetradio.api@gmail.com</b> or post on issue on the <a class="inline-a" href="https://github.com/Jet-Set-Radio-API/JetSetRadio-API">github page</a>.</p>
+      </div>
+
+      <div class="main-container">
+        <h2>Rate Limiting</h2>
+        <p>A request limit has been set to avoid malicious abuse(if anyone were to do that!). Limiting is set per IP address. You can make a total of up to 1000 requests per hour.</p>
+      </div>
+  
+      <div class="main-container">
+        <h2>Sorting</h2>
+        <p>All API routes support the <code class="code-snippet">sortBy</code> and <code class="code-snippet">orderBy</code> parameters. If orderBy is omitted, it will assume an ascending direction.</p>
+        <p>Example:</p>
+        <code class="code-snippet">https://jetsetradio-api.onrender.com/v1/api/characters/jsr?sortBy=name&orderBy=desc</code>
+      </div>
+  
+      <div class="main-container">
+        <h2>Limiting</h2>
+        <p>All API routes support the <code class="code-snippet">limit</code> parameter. You can use this to return a limited number of results instead of the entire response.</p>
+        <p>Example:</p>
+        <code class="code-snippet">https://jetsetradio-api.onrender.com/v1/api/locations/jsrf?limit=5</code>
+      </div>
+
+      <div class="main-container">
+        <h2>Caching</h2>
+        <p>All API routes utilize cache in memory to be able to serve content faster! The cache is automatically set to expire after 1 hour. The expiration is subject to future change.</p>
+      </div>     
 
     </div>
   </div>

@@ -2,10 +2,11 @@ import Constants from "../constants/dbConstants.js";
 import {Actions} from "../config/dbActions.js";
 import {performDBAction} from "../config/db.js";
 import {sortObjects} from "../utils/utility.js";
+import {fetchRandom} from "./utilController.js";
 import LOGGER from "../utils/logger.js";
 
 const Character = "Character";
-const {JSR_DB, JSRF_DB, BRC_DB, gameMap} = Constants;
+const {JSR_DB, JSRF_DB, BRC_DB} = Constants;
 
 export const getAllCharacters = async (req, res) => {
   try {
@@ -24,13 +25,7 @@ export const getAllCharacters = async (req, res) => {
 
 export const getRandomCharacter = async (req, res) => {
   try {
-    const games = [JSR_DB, JSRF_DB, BRC_DB];
-    const userSelectedGame = req?.query?.game;
-    let game =
-      gameMap[userSelectedGame] ||
-      games[Math.floor(Math.random() * games.length)];
-    const randomCharacter = await fetchRandomCharacter(req, game);
-    res.json(randomCharacter[0]);
+    res.send(await fetchRandom(req, Character));
   } catch (err) {
     LOGGER.error(`Could not fetch random character`, err);
     res.status(500).json({error: "Failed to fetch random character"});
@@ -124,16 +119,6 @@ export const fetchCharacters = async (req, dbName) => {
 
   return await performDBAction(
     Actions.fetchWithQuery,
-    dbName,
-    Character,
-    null,
-    req?.query
-  );
-};
-
-export const fetchRandomCharacter = async (req, dbName) => {
-  return await performDBAction(
-    Actions.fetchRandom,
     dbName,
     Character,
     null,
