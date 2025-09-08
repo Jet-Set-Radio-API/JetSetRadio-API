@@ -32,16 +32,16 @@ a {
 .main-container p .expandable-button.expanded::after {
   content: "-";
   vertical-align: middle;
-} 
+}
 
 @font-face {
   font-family: jetSet;
-  src: url('/font/Jet-Set.ttf');
+  src: url("/font/Jet-Set.ttf");
 }
 
 @font-face {
   font-family: jetSetItalic;
-  src: url('/font/Jet-Set-Italic.ttf');
+  src: url("/font/Jet-Set-Italic.ttf");
 }
 
 #img-container {
@@ -63,12 +63,13 @@ a {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   font-size: 5.5vw;
   text-align: center;
 }
 
-#home, #swagger {
+#home,
+#swagger {
   position: absolute;
   right: 3%;
   top: 3%;

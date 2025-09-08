@@ -8,7 +8,8 @@ const {JSR_DB, JSRF_DB, BRC_DB, gameMap} = Constants;
 /* Helper Functions to support all other Controllers */
 export const fetchRandom = async (req, resource, game) => {
   try {
-    const games = [JSR_DB, JSRF_DB, BRC_DB];
+    const games =
+      resource === "Audio" ? [JSR_DB, JSRF_DB] : [JSR_DB, JSRF_DB, BRC_DB];
     const selectedGame = req?.query?.game;
     const count = Number(req?.query?.count);
     const safeCount = Number.isFinite(count) && count > 0 ? count : 1;

@@ -6,6 +6,7 @@ import graffitiTagResource from "./examples/graffitiTagExample.js";
 import songResource from "./examples/songExample.js";
 import artistResource from "./examples/artistExample.js";
 import collectibleResource from "./examples/collectibleExample.js";
+import audioResource from "./examples/audioExample.js";
 
 const gameResponse = document.querySelector('#game-response');
 if (gameResponse) {
@@ -38,6 +39,10 @@ if (artistResponse) {
 const collectibleResponse = document.querySelector('#collectible-response');
 if (collectibleResponse) {
   collectibleResponse.textContent = JSON.stringify(collectibleResource, null, 4);
+}
+const audioResponse = document.querySelector('#audio-response');
+if (audioResponse) {
+  audioResponse.textContent = JSON.stringify(audioResource, null, 4);
 }
 
 const expandableButtons = document.querySelectorAll(".expandable-button");

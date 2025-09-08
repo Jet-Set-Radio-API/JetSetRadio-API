@@ -155,6 +155,24 @@
       </div>
 
       <div class="main-container">
+        <h2>Collectibles</h2>
+        <p>A Collectible is a resource describing a location or place from a specific Game. The only supported game currently is Bomb Rush Cyberfunk.</p>
+        <p>Endpoints:</p>
+        <ul>
+          <li><code class="code-snippet">/collectibles</code> ==> Returns all Collectibles</li>
+          <li><code class="code-snippet">/collectibles/random</code> ==> Returns a Random Collectible</li>
+          <li><code class="code-snippet">/collectibles/random?count=10</code> ==> Returns 10 random Collectibles</li>
+          <li><code class="code-snippet">/collectibles/:id</code> ==> Returns a single Collectible by ID</li>
+          <li><code class="code-snippet">/collectibles?type=CD</code> ==> Returns all CD Collectibles</li>
+          <li><code class="code-snippet">/collectibles?character.name=Shine</code> ==> Returns Shine's Collectibles</li>
+        </ul>
+        <p>Example Request:</p>
+        <code class="code-snippet">https://jetsetradio-api.onrender.com/v1/api/collectibles?sortBy=name&limit=5</code>
+        <p>Example Response: <button class="expandable-button">Expand</button> </p>
+        <pre id="collectible-response" class="expandable code-snippet" style="display: none;"></pre>
+      </div>
+
+      <div class="main-container">
         <h2>Songs</h2>
         <p>A Song is a resource describing a song from a specific Game.</p>
         <p>Endpoints:</p>
@@ -194,22 +212,27 @@
       </div>
 
       <div class="main-container">
-        <h2>Collectibles</h2>
-        <p>A Collectible is a resource describing a location or place from a specific Game. The only supported game currently is Bomb Rush Cyberfunk.</p>
+        <h2>Audio/Quotes</h2>
+        <p>An Audio is a resource describing a audio/quote by a character from a specific Game.</p>
         <p>Endpoints:</p>
         <ul>
-          <li><code class="code-snippet">/collectibles</code> ==> Returns all Collectibles</li>
-          <li><code class="code-snippet">/collectibles/random</code> ==> Returns a Random Collectible</li>
-          <li><code class="code-snippet">/collectibles/random?count=10</code> ==> Returns 10 random Collectibles</li>
-          <li><code class="code-snippet">/collectibles/:id</code> ==> Returns a single Collectible by ID</li>
-          <li><code class="code-snippet">/collectibles?type=CD</code> ==> Returns all CD Collectibles</li>
-          <li><code class="code-snippet">/collectibles?character.name=Shine</code> ==> Returns Shine's Collectibles</li>
+          <li><code class="code-snippet">/audio</code> ==> Returns all Audio</li>
+          <li><code class="code-snippet">/audio/random</code> ==> Returns a Random Audio From any Game</li>
+          <li><code class="code-snippet">/audio/random?game=jsr</code> ==> Returns a Random JSR Audio</li>
+          <li><code class="code-snippet">/audio/random?game=jsrf</code> ==> Returns a Random JSRF Audio</li>
+          <li><code class="code-snippet">/audio/random?count=10&game=jsrf</code> ==> Returns 10 random JSRF Audio</li>
+          <li><code class="code-snippet">/audio/jsr</code> ==> Returns all Jet Set Radio Audio</li>
+          <li><code class="code-snippet">/audio/jsr/:id</code> ==> Returns a single JSR Audio by ID</li>
+          <li><code class="code-snippet">/audio/jsrf</code> ==> Returns all Jet Set Radio Future Audio</li>
+          <li><code class="code-snippet">/audio/jsrf/:id</code> ==> Returns a single JSRF Audio by ID</li>
+          <li><code class="code-snippet">/audio/jsrf?speaker=DJ Professor K</code> ==> Returns DJ Professor K quotes from JSRF</li>
         </ul>
         <p>Example Request:</p>
-        <code class="code-snippet">https://jetsetradio-api.onrender.com/v1/api/collectibles?sortBy=name&limit=5</code>
+        <code class="code-snippet">https://jetsetradio-api.onrender.com/v1/api/songs?gameId=64285b7918c8a0231136dc5a</code>
         <p>Example Response: <button class="expandable-button">Expand</button> </p>
-        <pre id="collectible-response" class="expandable code-snippet" style="display: none;"></pre>
+        <pre id="audio-response" class="expandable code-snippet" style="display: none;"></pre>
       </div>
+      ___________________________________________________________
   
       <div class="main-container">
         <h2>Base URL</h2>

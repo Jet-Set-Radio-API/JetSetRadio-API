@@ -101,12 +101,18 @@ const filterPipeRoutes = async (req, endpoints) => {
         filteredEndpoints.push(endpoint);
       }
       if (
-        (jsrCollections.includes(model) && endpoint.includes("jsr")) ||
+        ((jsrCollections.includes(model) ||
+          jsrCollections.includes(model + "s")) &&
+          endpoint.includes("jsr")) ||
         endpoint.includes("levels")
       ) {
         filteredEndpoints.push(endpoint);
       }
-      if (jsrfCollections.includes(model) && endpoint.includes("jsrf")) {
+      if (
+        (jsrfCollections.includes(model) ||
+          jsrCollections.includes(model + "s")) &&
+        endpoint.includes("jsrf")
+      ) {
         filteredEndpoints.push(endpoint);
       }
       if (
