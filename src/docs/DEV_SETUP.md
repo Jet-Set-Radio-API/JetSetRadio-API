@@ -35,10 +35,7 @@ This page will guide you on setting up a development environment for this projec
     LOG_LEVEL=info
 
     # MONGO CONNECT (get from connection string)
-    MONGO_USER=
-    MONGO_PASS=
-    MONGO_CLUSTER=
-    MONGO_DOMAIN=
+    MONGO_URI=
 
     # MONGO DATABASES (names do not matter)
     JSR_DB=
@@ -46,7 +43,7 @@ This page will guide you on setting up a development environment for this projec
     BRC_DB
     CORE_DB=
     ```
-    The databases section in the env file are names of the databases. For development purposes it does not matter what these names are just as long as you can distinguish one from the other and you know which one is which.
+    The databases section in the env file are names of the databases. For development purposes it does not matter what these names are but I recommend labeling it as QA-JSR, QA-JSRF, QA-BRC, or something similar.
 
 6. Run the project 
     ```sh
