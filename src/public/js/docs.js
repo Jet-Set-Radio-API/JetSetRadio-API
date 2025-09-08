@@ -20,7 +20,6 @@ const resources = [
   {selector: "#audio-response", data: audioResource},
 ];
 
-// Render JSON data into response elements
 resources.forEach(({selector, data}) => {
   const el = document.querySelector(selector);
   if (el) el.textContent = JSON.stringify(data, null, 4);
