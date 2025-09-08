@@ -8,6 +8,7 @@ import characters from "./characterRouter.js";
 import locations from "./locationRouter.js";
 import levels from "./levelRouter.js";
 import collectibles from "./collectibleRouter.js";
+import audio from "./audioRouter.js";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -21,5 +22,6 @@ router.use("/characters", characters);
 router.use("/locations", locations);
 router.use("/levels", levels);
 router.use("/collectibles", collectibles);
+router.use("/audio", audio);
 
 export default router;
