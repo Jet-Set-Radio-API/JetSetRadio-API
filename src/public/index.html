@@ -13,6 +13,18 @@
       name="keywords"
       content="jet set radio, api, documentation, bomb rush cyberfunk, video game"
     />
+    <meta name="author" content="Jet Set Radio API Community" />
+    <meta property="og:title" content="Jet Set Radio API" />
+    <meta
+      property="og:description"
+      content="Integrate Jet Set Radio, JSRF, and Bomb Rush Cyberfunk data into your applications with this free API."
+    />
+    <meta
+      property="og:image"
+      content="https://jetsetradio-api.onrender.com/img/jsrapi-wallpaper.webp"
+    />
+    <meta property="og:url" content="https://jetsetradio-api.onrender.com/" />
+    <meta name="twitter:card" content="summary_large_image" />
     <title>Jet Set Radio API</title>
     <link rel="canonical" href="https://jetsetradio-api.onrender.com/" />
     <link rel="stylesheet" href="./style/index.css" />
@@ -29,12 +41,16 @@
       <div class="main-container text-center">
         <p>
           All The Data from Jet Set Radio, Jet Set Radio Future, and Bomb Rush
-          Cyberfunk you could want
+          Cyberfunk you could want in JSON format.
         </p>
         <p>games, characters, songs, graffiti-tags, locations, and more!</p>
         <p>
           Check out the <a class="inline-a" href="/docs">documentation</a> to
           get started
+        </p>
+        <p>
+          Click <a class="inline-a" href="/api-docs">here</a> to view a list of
+          available endpoints
         </p>
         <p>
           Interested in contributing to the project? Check out the
@@ -50,6 +66,7 @@
         </p>
       </div>
     </div>
+    <div id="api-docs"></div>
     <footer>
       <a href="https://github.com/Jet-Set-Radio-API/JetSetRadio-API"
         ><img src="./img/github.webp" alt="github-page-link"
@@ -58,5 +75,10 @@
         ><img src="./img/swagger.webp" alt="swagger-docs-button"
       /></a>
     </footer>
+
+    <script type="module">
+      import {createApiTable} from "/js/apiTable.js";
+      document.getElementById("api-docs").appendChild(createApiTable());
+    </script>
   </body>
 </html>
