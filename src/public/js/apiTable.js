@@ -1,3 +1,4 @@
+/* Displays a Table on the home page Showing Some Available Endpoints */
 export function createApiTable() {
   const container = document.createElement("div");
   container.className = "api-table-container";
@@ -5,7 +6,6 @@ export function createApiTable() {
   const table = document.createElement("table");
   table.className = "api-table";
 
-  // Header
   const headerRow = document.createElement("tr");
   ["Endpoint", "Description"].forEach((text) => {
     const th = document.createElement("th");
@@ -14,10 +14,7 @@ export function createApiTable() {
   });
   table.appendChild(headerRow);
 
-  // Base URL
   const baseUrl = "https://jetsetradio-api.onrender.com";
-
-  // Example rows
   const rows = [
     {
       endpoint: "/v1/api/audio/jsrf?speaker=DJ Professor K",
@@ -69,14 +66,13 @@ export function createApiTable() {
     const tr = document.createElement("tr");
 
     const tdEndpoint = document.createElement("td");
-    // Create clickable link
     const link = document.createElement("a");
     link.href = `${baseUrl}${endpoint}`;
     link.textContent = endpoint;
-    link.target = "_blank"; // open in new tab
-    link.rel = "noopener noreferrer"; // security
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
     link.style.color = "inherit"; // keep the same color as the table text
-    link.style.textDecoration = "none"; // remove underline if needed
+    link.style.textDecoration = "none";
     tdEndpoint.appendChild(link);
 
     const tdDesc = document.createElement("td");
