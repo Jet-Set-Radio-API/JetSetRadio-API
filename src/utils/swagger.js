@@ -6,7 +6,8 @@ const doc = {
   info: {
     title: "JetSetRadio-API",
     version: process.env.npm_package_version,
-    description: "Providing data for all things JSR and JSRF!",
+    description:
+      "Providing data for all things Jet Set Radio, Future, and Bomb Rush Cyberfunk!",
   },
   host: process.env.BASE_URL.split("http://")[1],
   schemes: ["https", "http"],
@@ -14,15 +15,15 @@ const doc = {
   tags: [
     {
       name: "Games",
-      description: "Titles from the JetSetRadio Franchise",
+      description: "Titles from the JetSetRadio Franchise & Surrounding games",
     },
     {
       name: "Characters",
-      description: "Characters from JSR/JSRF",
+      description: "Characters from JSR/JSRF/BRC",
     },
     {
       name: "Locations",
-      description: "Locations from JSR/JSRF",
+      description: "Locations from JSR/JSRF/BRC",
     },
     {
       name: "Levels",
@@ -30,15 +31,15 @@ const doc = {
     },
     {
       name: "GraffitiTags",
-      description: "All Graffiti-Points from the games",
+      description: "All Graffiti-Points from JSR and JSRF",
     },
     {
       name: "Songs",
-      description: "Soundtrack Data from JSR and JSRF",
+      description: "Soundtrack Data from JSR/JSRF/BRC",
     },
     {
       name: "Artists",
-      description: "Artist Data from JSR and JSRF",
+      description: "Artist Data from JSR/JSRF/BRC",
     },
     {
       name: "Collectibles",

@@ -103,6 +103,7 @@ const filterPipeRoutes = async (req, endpoints) => {
       if (
         ((jsrCollections.includes(model) ||
           jsrCollections.includes(model + "s")) &&
+          !endpoint.includes("random") &&
           endpoint.includes("jsr")) ||
         endpoint.includes("levels")
       ) {
@@ -111,12 +112,14 @@ const filterPipeRoutes = async (req, endpoints) => {
       if (
         (jsrfCollections.includes(model) ||
           jsrCollections.includes(model + "s")) &&
-        endpoint.includes("jsrf")
+        endpoint.includes("jsrf") &&
+        !endpoint.includes("random")
       ) {
         filteredEndpoints.push(endpoint);
       }
       if (
         brcCollections.includes(model) &&
+        !endpoint.includes("random") &&
         (endpoint.includes("brc") || endpoint.includes("collectibles"))
       ) {
         filteredEndpoints.push(endpoint);

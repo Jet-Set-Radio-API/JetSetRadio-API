@@ -2,23 +2,23 @@
   "swagger": "2.0",
   "info": {
     "title": "JetSetRadio-API",
-    "version": "1.1.4",
-    "description": "Providing data for all things JSR and JSRF!"
+    "version": "1.1.5",
+    "description": "Providing data for all things Jet Set Radio, Future, and Bomb Rush Cyberfunk!"
   },
   "host": "localhost:9005",
   "basePath": "/v1/api/",
   "tags": [
     {
       "name": "Games",
-      "description": "Titles from the JetSetRadio Franchise"
+      "description": "Titles from the JetSetRadio Franchise & Surrounding games"
     },
     {
       "name": "Characters",
-      "description": "Characters from JSR/JSRF"
+      "description": "Characters from JSR/JSRF/BRC"
     },
     {
       "name": "Locations",
-      "description": "Locations from JSR/JSRF"
+      "description": "Locations from JSR/JSRF/BRC"
     },
     {
       "name": "Levels",
@@ -26,15 +26,15 @@
     },
     {
       "name": "GraffitiTags",
-      "description": "All Graffiti-Points from the games"
+      "description": "All Graffiti-Points from JSR and JSRF"
     },
     {
       "name": "Songs",
-      "description": "Soundtrack Data from JSR and JSRF"
+      "description": "Soundtrack Data from JSR/JSRF/BRC"
     },
     {
       "name": "Artists",
-      "description": "Artist Data from JSR and JSRF"
+      "description": "Artist Data from JSR/JSRF/BRC"
     },
     {
       "name": "Collectibles",
