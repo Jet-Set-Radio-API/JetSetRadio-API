@@ -3,13 +3,14 @@ import axios from "axios";
 import dotenv from "dotenv";
 dotenv.config();
 
-import {connect, disconnect} from "./helper/mongodbMemoryTest.js";
-import {isValidJson} from "./helper/util.js";
-import {createArtist} from "./data/artists.js";
+import {connect, disconnect} from "../helper/mongodbMemoryTest.js";
+import {isValidJson} from "../helper/util.js";
+import {createArtist} from "../data/artists.js";
+
 import {
   fetchArtists,
   fetchSongsByArtistId,
-} from "../src/controllers/artistController.js";
+} from "../../src/controllers/artistController.js";
 
 const baseUrl = `${process.env.BASE_URL}/v1/api`;
 const createMock = (mockObj) =>

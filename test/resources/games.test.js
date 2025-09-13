@@ -3,10 +3,11 @@ import axios from "axios";
 import dotenv from "dotenv";
 dotenv.config();
 
-import {connect, disconnect} from "./helper/mongodbMemoryTest.js";
-import {isValidJson} from "./helper/util.js";
-import {fetchGames} from "../src/controllers/gameController.js";
-import {createGame} from "./data/games.js";
+import {connect, disconnect} from "../helper/mongodbMemoryTest.js";
+import {isValidJson} from "../helper/util.js";
+import {createGame} from "../data/games.js";
+
+import {fetchGames} from "../../src/controllers/gameController.js";
 
 const baseUrl = `${process.env.BASE_URL}/v1/api`;
 const createMock = (mockObj) =>

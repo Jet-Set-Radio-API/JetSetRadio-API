@@ -3,14 +3,15 @@ import axios from "axios";
 import dotenv from "dotenv";
 dotenv.config();
 
-import {connect, disconnect} from "./helper/mongodbMemoryTest.js";
-import {isValidJson} from "./helper/util.js";
+import {connect, disconnect} from "../helper/mongodbMemoryTest.js";
+import {isValidJson} from "../helper/util.js";
+import {createJsrSoul, createJsrfSoul} from "../data/graffitiSouls.js";
+
 import {
   fetchJSRSouls,
   fetchJSRFSouls,
-} from "../src/controllers/graffitiSoulController.js";
-import {createJsrSoul, createJsrfSoul} from "./data/graffitiSouls.js";
-import {sortObjects} from "../src/utils/utility.js";
+} from "../../src/controllers/graffitiSoulController.js";
+import {sortObjects} from "../../src/utils/utility.js";
 
 const baseUrl = `${process.env.BASE_URL}/v1/api`;
 const createMock = (mockObj) =>

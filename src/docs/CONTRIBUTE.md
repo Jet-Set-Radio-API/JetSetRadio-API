@@ -34,5 +34,5 @@ Before submitting your changes, make sure to run `npm run test` to verify all te
 How to run tests:
  - To run ALL Tests: `npm run test`
  - To test individual files
-     - `npm run test:file -- test/locations.test.js`
+     - `npm run test:file -- test/resources/locations.test.js`
 

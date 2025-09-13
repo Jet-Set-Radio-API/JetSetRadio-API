@@ -3,16 +3,17 @@ import axios from "axios";
 import dotenv from "dotenv";
 dotenv.config();
 
-import {connect, disconnect} from "./helper/mongodbMemoryTest.js";
-import {isValidJson} from "./helper/util.js";
+import {connect, disconnect} from "../helper/mongodbMemoryTest.js";
+import {isValidJson} from "../helper/util.js";
 import {
   createBrcCharacter,
   createJsrCharacter,
   createJsrfCharacter,
-} from "./data/characters.js";
-import {fetchCharacters} from "../src/controllers/characterController.js";
-import {sortObjects} from "../src/utils/utility.js";
-import Constants from "../src/constants/dbConstants.js";
+} from "../data/characters.js";
+
+import {fetchCharacters} from "../../src/controllers/characterController.js";
+import {sortObjects} from "../../src/utils/utility.js";
+import Constants from "../../src/constants/dbConstants.js";
 
 const baseUrl = `${process.env.BASE_URL}/v1/api`;
 const createMock = (mockObj) =>
