@@ -3,6 +3,7 @@ import Constants from "../constants/dbConstants.js";
 import {Actions} from "../config/dbActions.js";
 import {performDBAction} from "../config/db.js";
 import LOGGER from "../utils/logger.js";
+import {fetchRandom} from "./utilController.js";
 
 const Artist = "Artist";
 const Song = "Song";
@@ -18,6 +19,15 @@ export const getArtists = async (req, res) => {
   } catch (err) {
     LOGGER.error(`Could not fetch ALL Artists`, err);
     res.status(500).send(`Could not fetch ALL Artists due to error`, err);
+  }
+};
+
+export const getRandomArtist = async (req, res) => {
+  try {
+    res.send(await fetchRandom(req, Artist, "N/A"));
+  } catch (err) {
+    LOGGER.error(`Could not fetch random Artist`, err);
+    res.status(500).json({error: "Failed to fetch random Artist"});
   }
 };
 

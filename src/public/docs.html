@@ -41,6 +41,7 @@
           <li>Locations</li>
           <li>Levels</li>
           <li>Graffiti Tags</li>
+          <li>Graffiti Souls</li>
           <li>Songs</li>
           <li>Artists</li>
           <li>Collectibles</li>
@@ -48,7 +49,6 @@
         <p>The following Resources will be added in a future release of JSRAPI.</p>
         <p>If you would like to contribute in adding any of these resources, see the Contributing Docs.</p>
         <ul>
-          <li>Graffiti Souls</li>
           <li>Street Challenges</li>
           <li>Jet Challenges</li>
           <li>Gangs</li>
@@ -152,6 +152,29 @@
         <code class="code-snippet">https://jetsetradio-api.onrender.com/v1/api/graffiti-tags?sortBy=size&orderBy=desc</code>
         <p>Example Response: <button class="expandable-button">Expand</button> </p>
         <pre id="graffiti-tag-response" class="expandable code-snippet" style="display: none;"></pre>
+      </div>
+
+      <div class="main-container">
+        <h2>Graffiti-Souls</h2>
+        <p>A Graffiti Soul is a resource describing a Graffiti Soul from a specific Game.</p>
+        <p>Endpoints:</p>
+        <ul>
+          <li><code class="code-snippet">/graffiti-souls</code> ==> Returns all Graffiti-Souls</li>
+          <li><code class="code-snippet">/graffiti-souls/random</code> ==> Returns a Random Location From any Game</li>
+          <li><code class="code-snippet">/graffiti-souls/random?game=jsr</code> ==> Returns a Random JSR Graffiti-Souls</li>
+          <li><code class="code-snippet">/graffiti-souls/random?game=jsrf</code> ==> Returns a Random JSRF Graffiti-Souls</li>
+          <li><code class="code-snippet">/graffiti-souls/random?count=10</code> ==> Returns 10 random Graffiti-Souls</li>
+          <li><code class="code-snippet">/graffiti-souls/jsr</code> ==> Returns all Jet Set Radio Graffiti-Souls</li>
+          <li><code class="code-snippet">/graffiti-souls/jsr/:id</code> ==> Returns a single JSR Graffiti-Soul by ID</li>
+          <li><code class="code-snippet">/graffiti-souls/jsrf</code> ==> Returns all Jet Set Radio Future Graffiti-Souls</li>
+          <li><code class="code-snippet">/graffiti-souls/jsrf/:id</code> ==> Returns a single JSRF Graffiti-Soul by ID</li>
+          <li><code class="code-snippet">/graffiti-souls/jsrf?size=M</code> ==> Returns all JSRF M Graffiti-Souls</li>
+          <li><code class="code-snippet">/graffiti-souls?locationName=Hikage Street</code> ==> Returns All Graffiti-Souls in a specific location</li>
+        </ul>
+        <p>Example Request:</p>
+        <code class="code-snippet">https://jetsetradio-api.onrender.com/v1/api/graffiti-souls?sortBy=size&orderBy=desc</code>
+        <p>Example Response: <button class="expandable-button">Expand</button> </p>
+        <pre id="graffiti-soul-response" class="expandable code-snippet" style="display: none;"></pre>
       </div>
 
       <div class="main-container">
@@ -260,7 +283,7 @@
   
       <div class="main-container">
         <h2>Limiting</h2>
-        <p>All API routes support the <code class="code-snippet">limit</code> parameter. You can use this to return a limited number of results instead of the entire response.</p>
+        <p>All API routes(with the exception of /random) support the <code class="code-snippet">limit</code> parameter. You can use this to return a limited number of results instead of the entire response.</p>
         <p>Example:</p>
         <code class="code-snippet">https://jetsetradio-api.onrender.com/v1/api/locations/jsrf?limit=5</code>
       </div>

@@ -2,6 +2,7 @@ import express from "express";
 
 import games from "./gameRouter.js";
 import graffitiTags from "./graffitiTagRouter.js";
+import graffitiSouls from "./graffitiSoulRouter.js";
 import songs from "./songRouter.js";
 import artists from "./artistRouter.js";
 import characters from "./characterRouter.js";
@@ -18,6 +19,7 @@ router.use("/games", games);
 router.use("/songs", songs);
 router.use("/artists", artists);
 router.use("/graffiti-tags", graffitiTags);
+router.use("/graffiti-souls", graffitiSouls);
 router.use("/characters", characters);
 router.use("/locations", locations);
 router.use("/levels", levels);

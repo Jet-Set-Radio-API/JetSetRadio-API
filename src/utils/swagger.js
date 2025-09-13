@@ -34,6 +34,10 @@ const doc = {
       description: "All Graffiti-Points from JSR and JSRF",
     },
     {
+      name: "GraffitiSouls",
+      description: "All Graffiti-Souls from JSR and JSRF",
+    },
+    {
       name: "Songs",
       description: "Soundtrack Data from JSR/JSRF/BRC",
     },

@@ -29,6 +29,10 @@
       "description": "All Graffiti-Points from JSR and JSRF"
     },
     {
+      "name": "GraffitiSouls",
+      "description": "All Graffiti-Souls from JSR and JSRF"
+    },
+    {
       "name": "Songs",
       "description": "Soundtrack Data from JSR/JSRF/BRC"
     },
@@ -276,6 +280,22 @@
         }
       }
     },
+    "/artists/random": {
+      "get": {
+        "tags": [
+          "Artists"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/artists/{id}": {
       "get": {
         "tags": [
@@ -406,6 +426,118 @@
       "get": {
         "tags": [
           "GraffitiTags"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/graffiti-souls/": {
+      "get": {
+        "tags": [
+          "GraffitiSouls"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/graffiti-souls/random": {
+      "get": {
+        "tags": [
+          "GraffitiSouls"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/graffiti-souls/jsr": {
+      "get": {
+        "tags": [
+          "GraffitiSouls"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/graffiti-souls/jsr/{id}": {
+      "get": {
+        "tags": [
+          "GraffitiSouls"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/graffiti-souls/jsrf": {
+      "get": {
+        "tags": [
+          "GraffitiSouls"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/graffiti-souls/jsrf/{id}": {
+      "get": {
+        "tags": [
+          "GraffitiSouls"
         ],
         "description": "",
         "parameters": [

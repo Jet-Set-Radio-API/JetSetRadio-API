@@ -3,6 +3,7 @@ import characterResource from "./examples/characterExample.js";
 import locationResource from "./examples/locationExample.js";
 import levelResource from "./examples/levelExample.js";
 import graffitiTagResource from "./examples/graffitiTagExample.js";
+import graffitiSoulResource from "./examples/graffitiSoulExample.js";
 import songResource from "./examples/songExample.js";
 import artistResource from "./examples/artistExample.js";
 import collectibleResource from "./examples/collectibleExample.js";
@@ -14,6 +15,7 @@ const resources = [
   {selector: "#location-response", data: locationResource},
   {selector: "#level-response", data: levelResource},
   {selector: "#graffiti-tag-response", data: graffitiTagResource},
+  {selector: "#graffiti-soul-response", data: graffitiSoulResource},
   {selector: "#song-response", data: songResource},
   {selector: "#artist-response", data: artistResource},
   {selector: "#collectible-response", data: collectibleResource},

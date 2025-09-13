@@ -3,19 +3,19 @@ import {Actions} from "../config/dbActions.js";
 import Constants from "../constants/dbConstants.js";
 import LOGGER from "../utils/logger.js";
 
-const {JSR_DB, JSRF_DB, BRC_DB, gameMap} = Constants;
+const {JSR_DB, JSRF_DB, BRC_DB, gameMap, CORE_DB} = Constants;
 
 /* Helper Functions to support all other Controllers */
 export const fetchRandom = async (req, resource, game) => {
   try {
-    const games =
+    const games = game === 'N/A' ? [CORE_DB] :
       resource === "Audio" ? [JSR_DB, JSRF_DB] : [JSR_DB, JSRF_DB, BRC_DB];
     const selectedGame = req?.query?.game;
     const count = Number(req?.query?.count);
     const safeCount = Number.isFinite(count) && count > 0 ? count : 1;
 
     /* if a game is provided */
-    if (game || selectedGame) {
+    if ((game && game !== 'N/A') || selectedGame) {
       const dbName = game || gameMap[selectedGame];
       return await performDBAction(
         Actions.fetchRandom,

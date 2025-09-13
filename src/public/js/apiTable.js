@@ -57,6 +57,12 @@ export function createApiTable() {
       description: "Returns all Large Graffiti Tags from any game",
     },
     {
+      endpoint:
+        "/v1/api/graffiti-souls/jsrf?locationId=64c95601b33c6b029d936802",
+      description:
+        "Returns all Graffiti-Souls from The Skyscraper District Location",
+    },
+    {
       endpoint: "/v1/api/collectibles?type=Outfit",
       description: "Returns all Outfit collectibles from Bomb Rush Cyberfunk",
     },

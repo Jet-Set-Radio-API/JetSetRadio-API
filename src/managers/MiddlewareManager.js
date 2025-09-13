@@ -164,7 +164,7 @@ const cacheMiddleware = (req, res, next) => {
   }
   res.sendResponse = res.send;
   res.send = (body) => {
-    cache.put(cacheKey, body, 3600000); // 1 hour cache time, restart the service to bypass
+    cache.put(cacheKey, body, 3600000); // 1 hour cache time, restart the service to bypass or run /cache/clear
     res.sendResponse(body);
   };
   LOGGER.info(`Cache missed for url ${req.url}`);
