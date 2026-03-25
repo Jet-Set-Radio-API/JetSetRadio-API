@@ -53,7 +53,7 @@ export function createApiTable() {
         "Returns a random location from Jet Set Radio/Jet Grind Radio",
     },
     {
-      endpoint: "/v1/api/graffitiTags?size=L",
+      endpoint: "/v1/api/graffiti-tags?size=L",
       description: "Returns all Large Graffiti Tags from any game",
     },
     {
